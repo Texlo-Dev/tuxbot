@@ -1,3 +1,4 @@
+js 
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
@@ -20,9 +21,9 @@ fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
   }
   api_key = data;
   if (api_key) {
-  client.login(api_key);
+          client.login(api_key);
     } else {
-  console.log("No API Key found");
+          console.log("No API Key found");
     }
   console.log(data);
 });
