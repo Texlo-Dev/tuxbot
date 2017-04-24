@@ -13,6 +13,11 @@ client.on('message', msg => {
   }
 });
 
+client.on("message", msg=> {
+  if (msg.content.startsWith("ping")) {
+    message.channel.sendMessage("pong!");
+  }
+});
 
 fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
   if (err) {
