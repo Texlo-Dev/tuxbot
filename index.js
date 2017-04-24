@@ -13,6 +13,10 @@ client.on('message', msg => {
   }
 });
 
+client.on("message", (message) => {
+  if (message.content.startsWith("Tux")) {
+    message.channel.sendMessage("Did someone mention me?");
+  } else
 
 fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
   if (err) {
