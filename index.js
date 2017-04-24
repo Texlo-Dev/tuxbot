@@ -16,8 +16,6 @@ client.on('message', msg => {
 client.on("message", msg=> {
   if (msg.content.startsWith("Tux")) {
     msg.channel.sendMessage("Did someone mention me?");
-  if (msg.content.endsWith("Tux")) {
-    msg.channel.sendMessage("Did someone mention me?");
   }
 });
 
