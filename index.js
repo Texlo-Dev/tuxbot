@@ -35,8 +35,7 @@ fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
 var token = '';
 			var channelid = '';
 			var loggedin = false;
-			var Discord = window.Discord;
-			var client = new Discord.Client();
+		
 			document.getElementById('login').onclick = function() {
 				token = document.getElementById('token').value;
 				channelid = document.getElementById('channel').value;
