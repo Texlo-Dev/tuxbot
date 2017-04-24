@@ -31,35 +31,3 @@ fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
     }
   console.log(data);
 });
-
-var token = '';
-			var channelid = '';
-			var loggedin = false;
-		
-			document.getElementById('login').onclick = function() {
-				token = document.getElementById('token').value;
-				channelid = document.getElementById('channel').value;
-				client.login(token)
-				console.log('logging in');
-				loggedin = true;
-				document.getElementById('msgDiv').removeAttribute('style');
-				document.getElementById('loginDiv').setAttribute('style', 'display:none');
-			}
-			document.addEventListener('keydown', function(event) {
-				if(loggedin === true && event.keyCode == 13) {
-					client.channels.get(channelid).sendMessage(document.getElementById('message').value)
-					document.getElementById('message').value = '';
-				}
-			},false);
-			client.on('ready', function() {
-				console.log('ready')
-			});
-			client.on('message', function(msg) {
-				if(msg.channel.id !== channelid) return;
-				console.log('msg received!');
-				var el = document.createElement('li');
-				el.appendChild(document.createTextNode(msg.member.displayName + ': ' + msg.content));
-				document.getElementById('msgs').appendChild(el);
-				var e = document.getElementById("msgs");
-				e.scrollTop = e.scrollHeight;
-			});
