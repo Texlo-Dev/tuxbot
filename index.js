@@ -14,8 +14,8 @@ client.on('message', msg => {
 });
 
 client.on("message", msg=> {
-  if (msg.content.startsWith("ping")) {
-    message.channel.sendMessage("pong!");
+  if (msg.content.startsWith("Tux")) {
+    msg.channel.sendMessage("Did someone mention me?");
   }
 });
 
