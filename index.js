@@ -28,9 +28,9 @@ client.on("message", msg=> {
 });
 
 client.on("message", msg=> {
-  if (msg.content.startsWith(prefix + 'adddistro')) {
-    var nickname = msg.content.replace(prefix + "adddistro", "")
-    msg.member.setNickname(msg.author.username + "[" + nickname + "]");
+  if (msg.content.startsWith(prefix + 'distro')) {
+    var nickname = msg.content.replace(prefix + "distro", "")
+    msg.member.setNickname(msg.author.username + "["+ nickname +"]");
     msg.reply("Nickname Set.");
  }
 });
