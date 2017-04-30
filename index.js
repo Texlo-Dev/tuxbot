@@ -29,11 +29,33 @@ client.on("message", msg=> {
 
 client.on("message", msg=> {
   if (msg.content.startsWith(prefix + 'distro')) {
-    var nickname = msg.content.replace(prefix + "distro", "")
-    msg.member.setNickname(msg.author.username + "["+ nickname +"]");
-    msg.reply("Nickname Set.");
+    var nickname = msg.content.replace(prefix + "distro", "").trim()
+    newNick = msg.author.username + " ["+nickname+"]";
+    if(!nickname){
+        console.log('No input specified')
+         return msg.reply("Please specify a distro.");
+    }
+    else if(newNick.length > 32) {
+        return msg.reply("Nickname too long");
+    }
+    else {
+        msg.member.setNickname(newNick);
+        msg.reply('Nickname Set')
  }
-});
+}});
+
+client.on("message", msg => {
+  if (msg.content.startsWith(prefix + 'rmdistro')) {
+    msg.member.setNickname(msg.author.username);
+    msg.reply("Distro removed.")
+}});
+
+client.on("message", msg => {
+  if(msg.author.id !== "288855795951599617") return;
+  if (msg.content.startsWith(prefix + 'eval')) {
+      msg.reply(eval(msg.content.replace(prefix + "eval", "").trim()));
+}});
+
 
 fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
   if (err) {
