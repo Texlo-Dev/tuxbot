@@ -33,29 +33,41 @@ client.on('message', msg => {
 
       // Get requestor's avatar URL
       case prefix + 'fetchavatar':
-        msg.reply(msg.author.avatarURL)
+        msg.reply(msg.author.avatarURL);
         break;
 
       // Tell user what fetchavatar does
-      case prefix + 'fetchavatar help':
-        msg.reply('Returns the URL to your Discord-hosted avatar.')
+      case prefix + 'fetchavatar --help':
+        msg.reply('```Bash\nusage: /fetchavatar \nReturns the URL to your Discord-hosted avatar```');
         break;
 
       // Nickname update handler
       case prefix + 'distro':
-        var nickname = msg.content.replace(prefix + "distro", "").trim()
-        newNick = msg.author.username + " ["+nickname+"]";
+        var nickname = msg.content.replace(prefix + 'distro', '').trim()
+        newNick = msg.author.username + ' ['+nickname+']';
         if(!nickname){
-            console.log('No input specified')
-             return msg.reply("Please specify a distro.");
+          msg.member.setNickname(msg.author.username);
+          msg.reply('Distro removed')
         }
         else if(newNick.length > 32) {
-            return msg.reply("Nickname too long");
+            return msg.reply('Distro too long');
         }
         else {
             msg.member.setNickname(newNick);
-            msg.reply('Nickname Set')
+            msg.reply('Distro Set')
             break;
+        }
+
+      case prefix + 'distro --help':
+        msg.reply('```Bash\nusage: /distro [<distroname>]\nProviding no argument will remove the distro```');
+        break;
+        
+      // EVAL - Be careful modifying this!
+      case prefix + 'eval':
+        if(msg.author.id === '288855795951599617'){
+          msg.reply(eval(msg.content.replace(prefix + "eval", "").trim()));
+        }else{
+          break;
         }
     }
   }
