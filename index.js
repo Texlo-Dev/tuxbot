@@ -47,25 +47,28 @@ client.on('message', msg => {
         newNick = msg.author.username + ' ['+nickname+']';
         if(!nickname){
           msg.member.setNickname(msg.author.username);
-          msg.reply('Distro removed')
+          msg.reply('Distro removed');
+          break;
         }
         else if(newNick.length > 32) {
-            return msg.reply('Distro too long');
+          msg.reply('Distro too long');
+          break;
         }
         else {
-            msg.member.setNickname(newNick);
-            msg.reply('Distro Set')
-            break;
+          msg.member.setNickname(newNick);
+          msg.reply('Distro Set');
+          break;
         }
 
       case prefix + 'distro --help':
         msg.reply('```Bash\nusage: /distro [<distroname>]\nProviding no argument will remove the distro```');
         break;
-        
+
       // EVAL - Be careful modifying this!
       case prefix + 'eval':
         if(msg.author.id === '288855795951599617'){
           msg.reply(eval(msg.content.replace(prefix + "eval", "").trim()));
+          break;
         }else{
           break;
         }
@@ -82,9 +85,9 @@ fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
   token = data;
   if (token) {
           client.login(token).catch(console.error);
-          response = "Token Found";
+          response = 'Token Found';
     } else {
-        response = "No Token found"
+        response = 'No Token found';
     }
   console.log(response);
 });
