@@ -1,7 +1,7 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
-var prefix = "/";
+var prefix = '/';
 var token;
 
 client.on('ready', () => {
@@ -21,7 +21,7 @@ client.on('message', msg => {
 
     // Tux mentioned
     case 'Tux':
-      msg.reply("Did someone mention me?");
+      msg.reply('Did someone mention me?');
       break;
   }
 
@@ -68,7 +68,7 @@ client.on('message', msg => {
       // EVAL - Be careful modifying this!
       case prefix + 'eval':
         if(msg.author.id === '288855795951599617'){
-          msg.reply(eval(msg.content.replace(prefix + "eval", "").trim()));
+          msg.reply(eval(msg.content.replace(prefix + 'eval', '').trim()));
           break;
         }else{
           break;
@@ -77,39 +77,9 @@ client.on('message', msg => {
   }
 });
 
-client.on("message", msg=> {
-  if (msg.content.startsWith(prefix + 'distro')) {
-    var nickname = msg.content.replace(prefix + "distro", "").trim()
-    newNick = msg.author.username + " ["+nickname+"]";
-    if(!nickname){
-        console.log('No input specified')
-         return msg.reply("Please specify a distro.");
-    }
-    else if(newNick.length > 32) {
-        return msg.reply("Nickname too long");
-    }
-    else {
-        msg.member.setNickname(newNick);
-        msg.reply('Nickname Set')
- }
-}});
-
-client.on("message", msg => {
-  if (msg.content.startsWith(prefix + 'rmdistro')) {
-    msg.member.setNickname(msg.author.username);
-    msg.reply("Distro removed.")
-}});
-
-client.on("message", msg => {
-  if(msg.author.id !== "288855795951599617") return;
-  if (msg.content.startsWith(prefix + 'eval')) {
-      msg.reply(eval(msg.content.replace(prefix + "eval", "").trim()));
-}});
-
-
 // Read Discord token from file
 fs.readFile('./discord_key.txt', 'utf8', function (err,data) {
-  var response = "";
+  var response = '';
   if (err) {
     return console.log(err);
   }
