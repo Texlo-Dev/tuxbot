@@ -46,7 +46,7 @@ client.on('message', msg => {
       case prefix + 'distro':
         var nickname = msg.content.replace(prefix + 'distro', '').trim()
         newNick = msg.author.username + ' ['+nickname+']';
-        if(!nickname){
+        if(nickname.length == 0){
           msg.member.setNickname(msg.author.username);
           msg.reply('Distro removed');
           break;
