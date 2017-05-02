@@ -60,6 +60,7 @@ client.on('message', msg => {
           msg.reply('Distro Set');
           break;
         }
+        break;
 
       case prefix + 'distro --help':
         msg.reply('```Bash\nusage: /distro [<distroname>]\nProviding no argument will remove the distro```');
