@@ -1,10 +1,10 @@
 {
   "name": "ric1",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bot for Linux Discord",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^11.0.0",
+    "discord.js": "^11.1.0",
     "discordie": "^0.11.0"
   },
   "devDependencies": {},
@@ -12,5 +12,13 @@
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
 }

@@ -32,17 +32,17 @@ client.on('message', msg => {
     switch(msg.content){
 
       // Get requestor's avatar URL
-      case prefix + 'fetchavatar':
+      case msg.content.includes(prefix + 'fetchavatar'):
         msg.reply(msg.author.avatarURL);
         break;
 
       // Show help text for /fetchavatar
-      case prefix + 'fetchavatar --help':
+      case msg.content.includes(prefix + 'fetchavatar --help'):
         msg.reply('```Bash\nusage: /fetchavatar \nReturns the URL to your Discord-hosted avatar```');
         break;
 
       // Nickname update handler
-      case prefix + 'distro':
+      case msg.content.includes(prefix + 'distro'):
         var nickname = msg.content.replace(prefix + 'distro', '').trim();
         newNick = msg.author.username + ' ['+nickname+']';
 
@@ -65,12 +65,12 @@ client.on('message', msg => {
         }
 
       // Show help text for /distro
-      case prefix + 'distro --help':
+      case msg.content.includes(prefix + 'distro --help'):
         msg.reply('```Bash\nusage: /distro <distroname>\nProviding no argument will remove the distro```');
         break;
 
       //==== EVAL - Be careful modifying this! ====//
-      case prefix + 'eval':
+      case msg.content.includes(prefix + 'eval'):
         if(msg.author.id === '288855795951599617'){
           msg.reply(eval(msg.content.replace(prefix + 'eval', '').trim()));
           break;
