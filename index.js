@@ -32,22 +32,28 @@ client.on('message', msg => {
     switch(msg.content){
 
       // Get requestor's avatar URL
-      case msg.content.includes(prefix + 'fetchavatar'):
+      case prefix + 'fetchavatar':
         msg.reply(msg.author.avatarURL);
         break;
 
       // Show help text for /fetchavatar
-      case msg.content.includes(prefix + 'fetchavatar --help'):
+      case prefix + 'fetchavatar --help':
         msg.reply('```Bash\nusage: /fetchavatar \nReturns the URL to your Discord-hosted avatar```');
         break;
 
+      // Show help text for /distro
+      case prefix + 'distro --help':
+        msg.reply('```Bash\nusage: /distro <distroname>\nProviding no argument will remove the distro```');
+        break;
+
       // Nickname update handler
-      case msg.content.includes(prefix + 'distro'):
+      case prefix + 'distro':
+      case (msg.content.match(/\/distro[a-zA-Z0-9 ]*/) || {}).input:
         var nickname = msg.content.replace(prefix + 'distro', '').trim();
         newNick = msg.author.username + ' ['+nickname+']';
 
         // Remove distro
-        if(!nickname){
+        if(nickname.length == 0){
           msg.member.setNickname(msg.author.username);
           msg.reply('Distro removed');
           break;
@@ -63,15 +69,9 @@ client.on('message', msg => {
           msg.reply('Distro Set');
           break;
         }
-        break;
-
-      // Show help text for /distro
-      case msg.content.includes(prefix + 'distro --help'):
-        msg.reply('```Bash\nusage: /distro <distroname>\nProviding no argument will remove the distro```');
-        break;
 
       //==== EVAL - Be careful modifying this! ====//
-      case msg.content.includes(prefix + 'eval'):
+      case prefix + 'eval':
         if(msg.author.id === '288855795951599617'){
           msg.reply(eval(msg.content.replace(prefix + 'eval', '').trim()));
           break;
