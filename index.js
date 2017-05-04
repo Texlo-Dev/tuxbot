@@ -63,6 +63,7 @@ client.on('message', msg => {
           msg.reply('Distro Set');
           break;
         }
+        break;
 
       // Show help text for /distro
       case msg.content.includes(prefix + 'distro --help'):
