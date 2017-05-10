@@ -47,7 +47,6 @@ client.on('message', msg => {
         break;
 
       // Nickname update handler
-      case prefix + 'distro':
       case (msg.content.match(/\/distro[a-zA-Z0-9 ]*/) || {}).input:
         var nickname = msg.content.replace(prefix + 'distro', '').trim();
         newNick = msg.author.username + ' ['+nickname+']';
@@ -60,7 +59,7 @@ client.on('message', msg => {
         }
         // Check for length limit
         else if(newNick.length > 32) {
-          msg.reply('Distro too long');
+          msg.reply('Distro Too Long');
           break;
         }
         // Set distro
