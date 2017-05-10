@@ -75,7 +75,7 @@ client.on('message', msg => {
       //Eval command: extra caution
       case prefix + 'eval':
       case (msg.content.match(/\/eval[a-zA-Z0-9 ]*/) || {}).input:
-          if (msg.author.id === rTexel || msg.author.id === webjocky) {
+          if (msg.author.id === rTexel) {
               var evaled = eval(msg.content.replace(prefix + 'eval', '').trim());
               if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
@@ -92,7 +92,7 @@ client.on('message', msg => {
       // Say command
       case prefix + 'say':
       case (msg.content.match(/\/say[a-zA-Z0-9 ]*/) || {}).input:
-        if (msg.author.id === rTexel || msg.author.id === webjocky) {
+        if (msg.author.id === rTexel) {
           msg.delete(0)
           if(msg.channel.startTyping) msg.channel.stopTyping();
           msg.channel.send(msg.content.split(" ").slice(1).join(" "));
