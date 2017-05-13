@@ -101,7 +101,7 @@ client.on('message', msg => {
         break;
 
       // Ban command
-      
+           case prefix + 'ban'
             if (msg.member.hasPermission("BAN_MEMBERS")){
               msg.delete();
               msg.guild.member(msg.mentions.users.first()).ban().catch(console.error);
