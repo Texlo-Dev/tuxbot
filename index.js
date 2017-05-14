@@ -101,18 +101,19 @@ client.on('message', msg => {
         break;
 
       // Ban command
-        case prefix + 'ban':
-            if (msg.member.hasPermission("BAN_MEMBERS")){
-              msg.delete();
-              msg.guild.member(msg.mentions.users.first()).ban().catch(console.error);
-              break;
-            }
-           else {
-             msg.reply("sorry I can't do that for you.");
-             break;
-           }
+      case prefix + 'ban':
+          if (msg.member.hasPermission("BAN_MEMBERS")){
+            msg.delete();
+            console.log(msg.mentions.members.first());
+            msg.mentions.users.first().ban().catch(console.error);
+            break;
+          }
+         else {
+           msg.reply("sorry I can't do that for you.");
+           break;
          }
-       }});
+        }
+      }});
 
 
 // Read Discord token from file
