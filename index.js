@@ -4,7 +4,7 @@ const fs = require('fs');
 var prefix = '/';
 var token;
 var rTexel = '288855795951599617';
-var webjocky = '176503593321496577';
+var ipad_kid = '293792580376854529';
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.username}!`);
@@ -75,7 +75,8 @@ client.on('message', msg => {
       //Eval command: extra caution
       case prefix + 'eval':
       case (msg.content.match(/\/eval[a-zA-Z0-9 ]*/) || {}).input:
-          if (msg.author.id === rTexel) {
+          if (msg.author.id == rTexel || msg.author.id === ipad_kid) {
+              msg.delete(0)
               var evaled = eval(msg.content.replace(prefix + 'eval', '').trim());
               if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
@@ -92,16 +93,26 @@ client.on('message', msg => {
       // Say command
       case prefix + 'say':
       case (msg.content.match(/\/say[a-zA-Z0-9 ]*/) || {}).input:
-        if (msg.author.id === rTexel) {
+        if (msg.author.id === rTexel || msg.author.id === ipad_kid) {
           msg.delete(0)
-          if(msg.channel.startTyping) msg.channel.stopTyping();
           msg.channel.send(msg.content.split(" ").slice(1).join(" "));
           break;
         }
         break;
-    }
-  }
-});
+
+      // Ban command
+        case prefix + 'ban':
+            if (msg.member.hasPermission("BAN_MEMBERS")){
+              msg.delete();
+              msg.guild.member(msg.mentions.users.first()).ban().catch(console.error);
+              break;
+            }
+           else {
+             msg.reply("sorry I can't do that for you.");
+             break;
+           }
+         }
+       }});
 
 
 // Read Discord token from file
