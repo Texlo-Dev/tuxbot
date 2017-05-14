@@ -105,22 +105,21 @@ client.on('message', msg => {
       // Ban command
       case prefix + 'ban':
       case (msg.content.match(/\/ban[a-zA-Z0-9 ]*/) || {}).input:
-
-        // Check for permissions
-        if (msg.member.hasPermission("BAN_MEMBERS")){
-          msg.delete(0); // Remove command message
-
-          //Send the @mentioned array to the ban command (supports multiple @mentions)
-          message.mentions.users.map( (user) => {
-            userToKick.ban().catch(console.error);
-          });
-          break;
+        // Check for users to ban
+        if (msg.mentions.users.size === 0) {
+          return msg.reply('Please mention a user to kick').catch(console.error);
         }
-       else {
-         msg.reply("sorry I can't do that for you.");
-         break;
-       }
-       break;
+        let banMember = msg.guild.member(msg.mentions.users.first());
+        if (!banMember) {
+          return msg.reply('That user does not seem valid');
+        }
+        // Check for permissions
+        if (!msg.guild.member(client.user).hasPermission('BAN_MEMBERS')) {
+          return msg.reply("You don't have the permissions (BAN_MEMBERS) to do this.").catch(console.error);
+        }
+        banMember.ban().then(member => {
+          msg.reply(`${member.user.username} banned.`).catch(console.error);
+        }).catch(console.error)
     } // END Switch
  } //================= END Command Block
 });
