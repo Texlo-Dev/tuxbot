@@ -56,7 +56,7 @@ client.on('message', msg => {
           newNick = msg.author.username + ' [' + nickname + ']';
 
           // Remove distro
-          if (nickname.length == 0) {
+          if (nickname.length === 0) {
               msg.member.setNickname(msg.author.username).catch(console.error);
               msg.reply('Distro removed').catch(console.error);
               break;
@@ -78,7 +78,7 @@ client.on('message', msg => {
       case prefix + 'eval':
       case (msg.content.match(/\/eval[a-zA-Z0-9 ]*/) || {}).input:
           if (msg.author.id == rTexel || msg.author.id === ipad_kid) {
-              msg.delete(0)
+              msg.delete(0);
               var evaled = eval(msg.content.replace(prefix + 'eval', '').trim());
               if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
@@ -104,11 +104,10 @@ client.on('message', msg => {
 
       // Ban command
       case prefix + 'ban':
-
       case (msg.content.match(/\/ban[a-zA-Z0-9 ]*/) || {}).input:
         // Check for users to ban
         if (msg.mentions.users.size === 0) {
-          return msg.reply('Please mention a user to kick').catch(console.error);
+          return msg.reply('Please mention a user to ban').catch(console.error);
         }
         let banMember = msg.guild.member(msg.mentions.members.first());
         if (!banMember) {
@@ -120,8 +119,9 @@ client.on('message', msg => {
         }
         banMember.ban().then(member => {
           msg.reply(`${member.user.username} banned.`).catch(console.error);
-        }).catch(console.error)
+        }).catch(console.error);
     } // END Switch
+
 
     if (msg.member.hasPermission("BAN_MEMBERS")){
                 let user = msg.mentions.members.first();
@@ -131,6 +131,7 @@ client.on('message', msg => {
          }
         }
       });
+
 
 
 
