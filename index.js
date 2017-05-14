@@ -110,7 +110,7 @@ client.on('message', msg => {
         if (msg.mentions.users.size === 0) {
           return msg.reply('Please mention a user to kick').catch(console.error);
         }
-        let banMember = msg.guild.member(msg.mentions.users.first());
+        let banMember = msg.guild.member(msg.mentions.members.first());
         if (!banMember) {
           return msg.reply('That user does not seem valid');
         }
@@ -122,21 +122,15 @@ client.on('message', msg => {
           msg.reply(`${member.user.username} banned.`).catch(console.error);
         }).catch(console.error)
     } // END Switch
- } //================= END Command Block
-});
 
-          if (msg.member.hasPermission("BAN_MEMBERS")){
-            msg.delete();
-            console.log(msg.mentions.members.first());
-            msg.mentions.users.first().ban().catch(console.error);
-            break;
-          }
-         else {
-           msg.reply("sorry I can't do that for you.");
-           break;
+    if (msg.member.hasPermission("BAN_MEMBERS")){
+                let user = msg.mentions.members.first();
+                msg.delete();
+                console.log(msg.mentions.members.first());
+                msg.mentions.members.first().ban().catch(console.error);
          }
         }
-      }});
+      });
 
 
 
