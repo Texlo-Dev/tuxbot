@@ -7,9 +7,15 @@
     "discord.js": "^11.1.0",
     "discordie": "^0.11.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jshint": "^2.9.4"
+  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "./node_modules/jshint/bin/jshint index.js"
+  },
+  "jshintConfig":{
+    "esversion": "6"
   },
   "author": "",
   "license": "ISC",
