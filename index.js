@@ -5,6 +5,7 @@ var prefix = '/';
 var token;
 var rTexel = '288855795951599617';
 var ipad_kid = '293792580376854529';
+var webjocky = '176503593321496577';
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.username}!`);
@@ -26,6 +27,7 @@ client.on('message', msg => {
         break;
   }
 
+  //==========BEGIN Command Block
   // Check if the message is a command
   if (msg.content.startsWith(prefix)) {
 
@@ -94,25 +96,34 @@ client.on('message', msg => {
       case prefix + 'say':
       case (msg.content.match(/\/say[a-zA-Z0-9 ]*/) || {}).input:
         if (msg.author.id === rTexel || msg.author.id === ipad_kid) {
-          msg.delete(0)
+          msg.delete(0);
           msg.channel.send(msg.content.split(" ").slice(1).join(" "));
           break;
         }
         break;
 
       // Ban command
-        case prefix + 'ban':
-            if (msg.member.hasPermission("BAN_MEMBERS")){
-              msg.delete();
-              msg.guild.member(msg.mentions.users.first()).ban().catch(console.error);
-              break;
-            }
-           else {
-             msg.reply("sorry I can't do that for you.");
-             break;
-           }
-         }
-       }});
+      case prefix + 'ban':
+      case (msg.content.match(/\/ban[a-zA-Z0-9 ]*/) || {}).input:
+
+        // Check for permissions
+        if (msg.member.hasPermission("BAN_MEMBERS")){
+          msg.delete(0); // Remove command message
+
+          //Send the @mentioned array to the ban command (supports multiple @mentions)
+          message.mentions.users.map( (user) => {
+            userToKick.ban().catch(console.error);
+          });
+          break;
+        }
+       else {
+         msg.reply("sorry I can't do that for you.");
+         break;
+       }
+       break;
+    } // END Switch
+ } //================= END Command Block
+});
 
 
 // Read Discord token from file
