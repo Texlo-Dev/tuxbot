@@ -104,7 +104,6 @@ client.on('message', msg => {
 
       // Ban command
       case prefix + 'ban':
-
       case (msg.content.match(/\/ban[a-zA-Z0-9 ]*/) || {}).input:
         // Check for users to ban
         if (msg.mentions.users.size === 0) {
