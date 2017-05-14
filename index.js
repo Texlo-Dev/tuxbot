@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const fs = require('fs');
+const config = require('./config.json');
 var prefix = '/';
 var token;
 var rTexel = '288855795951599617';
@@ -109,7 +109,7 @@ client.on('message', msg => {
         if (msg.mentions.users.size === 0) {
           return msg.reply('Please mention a user to ban').catch(console.error);
         }
-        let banMember = msg.guild.member(msg.mentions.users.first());
+        let banMember = msg.guild.member(msg.mentions.members.first());
         if (!banMember) {
           return msg.reply('That user does not seem valid');
         }
@@ -121,22 +121,20 @@ client.on('message', msg => {
           msg.reply(`${member.user.username} banned.`).catch(console.error);
         }).catch(console.error);
     } // END Switch
- } //================= END Command Block
-});
+
+
+    if (msg.member.hasPermission("BAN_MEMBERS")){
+                let user = msg.mentions.members.first();
+                msg.delete();
+                console.log(msg.mentions.members.first());
+                msg.mentions.members.first().ban().catch(console.error);
+         }
+        }
+      });
+
+
 
 
 // Read Discord token from file
-fs.readFile('./discord_key.txt', 'utf8', function(err, data) {
-    var response = '';
-    if (err) {
-        return console.log(err);
-    }
-    token = data;
-    if (token) {
-        client.login(token).catch(console.error);
-        response = 'Token Found';
-    } else {
-        response = 'No Token found';
-    }
-    console.log(response);
-});
+client.login(config.token);
+client.on('debug', console.log)
