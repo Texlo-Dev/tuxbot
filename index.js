@@ -5,6 +5,7 @@ var prefix = '/';
 var token;
 var rTexel = '288855795951599617';
 var ipad_kid = '293792580376854529';
+var webjocky = '176503593321496577';
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.username}!`);
@@ -26,6 +27,7 @@ client.on('message', msg => {
         break;
   }
 
+  //==========BEGIN Command Block
   // Check if the message is a command
   if (msg.content.startsWith(prefix)) {
 
@@ -94,7 +96,7 @@ client.on('message', msg => {
       case prefix + 'say':
       case (msg.content.match(/\/say[a-zA-Z0-9 ]*/) || {}).input:
         if (msg.author.id === rTexel || msg.author.id === ipad_kid) {
-          msg.delete(0)
+          msg.delete(0);
           msg.channel.send(msg.content.split(" ").slice(1).join(" "));
           break;
         }
@@ -102,6 +104,27 @@ client.on('message', msg => {
 
       // Ban command
       case prefix + 'ban':
+
+      case (msg.content.match(/\/ban[a-zA-Z0-9 ]*/) || {}).input:
+        // Check for users to ban
+        if (msg.mentions.users.size === 0) {
+          return msg.reply('Please mention a user to kick').catch(console.error);
+        }
+        let banMember = msg.guild.member(msg.mentions.users.first());
+        if (!banMember) {
+          return msg.reply('That user does not seem valid');
+        }
+        // Check for permissions
+        if (!msg.guild.member(client.user).hasPermission('BAN_MEMBERS')) {
+          return msg.reply("You don't have the permissions (BAN_MEMBERS) to do this.").catch(console.error);
+        }
+        banMember.ban().then(member => {
+          msg.reply(`${member.user.username} banned.`).catch(console.error);
+        }).catch(console.error)
+    } // END Switch
+ } //================= END Command Block
+});
+
           if (msg.member.hasPermission("BAN_MEMBERS")){
             msg.delete();
             console.log(msg.mentions.members.first());
@@ -114,6 +137,7 @@ client.on('message', msg => {
          }
         }
       }});
+
 
 
 // Read Discord token from file
