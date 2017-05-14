@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const fs = require('fs');
+const config = require('./config.json');
 var prefix = '/';
 var token;
 var rTexel = '288855795951599617';
@@ -135,17 +135,5 @@ client.on('message', msg => {
 
 
 // Read Discord token from file
-fs.readFile('./discord_key.txt', 'utf8', function(err, data) {
-    var response = '';
-    if (err) {
-        return console.log(err);
-    }
-    token = data;
-    if (token) {
-        client.login(token).catch(console.error);
-        response = 'Token Found';
-    } else {
-        response = 'No Token found';
-    }
-    console.log(response);
-});
+client.login(config.token);
+
