@@ -137,4 +137,4 @@ client.on('message', msg => {
 
 // Read Discord token from file
 client.login(config.token);
-client.on('debug', console.log)
+client.on('debug', console.log);
