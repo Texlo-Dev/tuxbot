@@ -122,7 +122,7 @@ client.on('message', msg => {
         }).catch(console.error);
     } // END Switch
 
-   });
+  }});
 
 
 
