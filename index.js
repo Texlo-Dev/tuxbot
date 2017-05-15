@@ -122,15 +122,7 @@ client.on('message', msg => {
         }).catch(console.error);
     } // END Switch
 
-
-    if (msg.member.hasPermission("BAN_MEMBERS")){
-                let user = msg.mentions.members.first();
-                msg.delete();
-                console.log(msg.mentions.members.first());
-                msg.mentions.members.first().ban().catch(console.error);
-         }
-        }
-      });
+   });
 
 
 
