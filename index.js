@@ -120,7 +120,7 @@ client.on('message', msg => {
         banMember.ban().then(member => {
           msg.reply(`${member.user.username} banned.`).catch(console.error);
         }).catch(console.error);
-    } // END Switch
+    } // END Switc
 
   }});
 
