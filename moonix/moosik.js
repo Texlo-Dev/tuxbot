@@ -7,7 +7,7 @@ let queue = {};
 
 const commands = {
 	'play': (msg) => {
-		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Add some songs to the queue first with ${tokens.prefix}add`);
+		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Hmm..I couldn't find a song to play. Add one with ${tokens.prefix}add`);
 		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.play(msg));
 		if (queue[msg.guild.id].playing) return msg.channel.sendMessage('Already Playing');
 		let dispatcher;
