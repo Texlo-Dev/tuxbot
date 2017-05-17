@@ -63,7 +63,7 @@ const commands = {
 	},
 	'add': (msg) => {
 		let url = msg.content.split(' ')[1];
-		if (url == '' || url === undefined) return msg.channel.sendMessage(`Sorry, please specify a YouTube ID or link with ${tokens.prefix}add`);
+		if (url == '' || url === undefined) return msg.channel.sendMessage(`Hmm...I couldn't find a link. Add one with ${tokens.prefix}add`);
 		yt.getInfo(url, (err, info) => {
 			if(err) return msg.channel.sendMessage('Invalid YouTube Link: ' + err);
 			if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
