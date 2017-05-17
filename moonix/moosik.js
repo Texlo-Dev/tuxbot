@@ -20,7 +20,7 @@ const commands = {
 				queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
 			});
-			msg.channel.sendMessage(`Playing: **${song.title}** as requested by: **${song.requester}**`);
+			msg.channel.sendMessage(`:heavy_check_mark: Playing: **${song.title}** as requested by: **${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : tokens.passes });
 			let collector = msg.channel.createCollector(m => m);
 			collector.on('message', m => {
@@ -68,7 +68,7 @@ const commands = {
 			if(err) return msg.channel.sendMessage('Invalid YouTube Link: ' + err);
 			if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
 			queue[msg.guild.id].songs.push({url: url, title: info.title, requester: msg.author.username});
-			msg.channel.sendMessage(`added **${info.title}** to the queue`);
+			msg.channel.sendMessage(`:heavy_check_mark: Added **${info.title}** to the queue!`);
 		});
 	},
 	'queue': (msg) => {
