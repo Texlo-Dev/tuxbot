@@ -20,7 +20,7 @@ const commands = {
 				queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
 			});
-			msg.channel.sendMessage(`:heavy_check_mark: Playing: **${song.title}** as requested by: **${song.requester}**`);
+			msg.channel.sendMessage(`:white_check_mark: Playing: **${song.title}** as requested by: **${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : tokens.passes });
 			let collector = msg.channel.createCollector(m => m);
 			collector.on('message', m => {
@@ -29,7 +29,7 @@ const commands = {
 				} else if (m.content.startsWith(tokens.prefix + 'resume')){
 					msg.channel.sendMessage('resumed').then(() => {dispatcher.resume();});
 				} else if (m.content.startsWith(tokens.prefix + 'skip')){
-					msg.channel.sendMessage('skipped').then(() => {dispatcher.end();});
+					msg.channel.sendMessage(':white_check_mark: Skipped!').then(() => {dispatcher.end();});
 				} else if (m.content.startsWith('volume+')){
 					if (Math.round(dispatcher.volume*50) >= 100) return msg.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
 					dispatcher.setVolume(Math.min((dispatcher.volume*50 + (2*(m.content.split('+').length-1)))/50,2));
@@ -68,7 +68,7 @@ const commands = {
 			if(err) return msg.channel.sendMessage('Invalid YouTube Link: ' + err);
 			if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
 			queue[msg.guild.id].songs.push({url: url, title: info.title, requester: msg.author.username});
-			msg.channel.sendMessage(`:heavy_check_mark: Added **${info.title}** to the queue!`);
+			msg.channel.sendMessage(`:white_check_mark: Added **${info.title}** to the queue!`);
 		});
 	},
 	'queue': (msg) => {
