@@ -6,6 +6,11 @@ var token;
 var rTexel = '288855795951599617';
 var ipad_kid = '293792580376854529';
 var webjocky = '176503593321496577';
+const responses = [
+   'yes', 'no', 'maybe', 'okay', 'sure', 'ask me later', 'naw', 'Most Likely', 'sure', 'Definitely'
+]
+
+
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.username}!`);
@@ -38,8 +43,17 @@ client.on('message', msg => {
       case prefix + 'fetchavatar':
           msg.reply(msg.author.avatarURL).catch(console.error);
           break;
-
-      // Show help text for /fetchavatar
+        
+      // Alert
+      case prefix + 'alert':
+            if (!msg.member.hasPermission('BAN_MEMBERS')) {
+                return;
+            }
+            msg.delete(0);
+            msg.channel.send('**BEEP BOOP :rotating_light: YOU ARE SURROUNDED :rotating_light: PUT YOUR HANDS UP :rotating_light: ON THE GROUND :rotating_light:**');
+            break;
+   
+   // Show help text for /fetchavatar
       case prefix + 'fetchavatar --help':
           msg.reply('```Bash\nusage: /fetchavatar \nReturns the URL to your Discord-hosted avatar```').catch(console.error);
           break;
@@ -48,7 +62,8 @@ client.on('message', msg => {
       case prefix + 'distro --help':
           msg.reply('```Bash\nusage: /distro <distroname>\nProviding no argument will remove the distro```').catch(console.error);
           break;
-
+                
+      
       // Nickname update handler
       case prefix + 'distro':
       case (msg.content.match(/\/distro[a-zA-Z0-9 ]*/) || {}).input:
