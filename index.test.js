@@ -1,20 +1,46 @@
 const Discord = require('discord.js');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+
+  storage: './database.sqlite'
+});
 const client = new Discord.Client();
 const config = require('./config.json');
-const tokens = require('./tokens.json');
 var prefix = '/';
 var token;
 var rTexel = '288855795951599617';
 var ipad_kid = '293792580376854529';
 var webjocky = '176503593321496577';
+const responses = [
+   'yes.', 'no.', 'maybe.', 'okay.', 'Ask me later.', 'Naw.', 'Most Likely.', 'Sure.', 'Definitely.', 'It is likely.', 'Certainly.', 
+];
+
+  const distroList = sequelize.define('distroList', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    distro: {
+        type: Sequelize.STRING
+    }
+});
+
+distroList.sync();
+
+
+
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.username}!`);
     client.user.setGame('with a Terminal').catch(console.error);
 });
 
+
+
 // Message Listener & Logic
-client.on('message', msg => {
+client.on('message', async msg => {
   // Check if conversational
   switch (msg.content) {
     // ping -> Pong!
@@ -39,8 +65,22 @@ client.on('message', msg => {
       case prefix + 'fetchavatar':
           msg.reply(msg.author.avatarURL).catch(console.error);
           break;
+        
+      // Alert
+      case prefix + 'alert':
+            if (!msg.member.hasPermission('BAN_MEMBERS')) {
+                return;
+            }
+            msg.delete(0);
+            msg.channel.send('**BEEP BOOP :rotating_light: YOU ARE SURROUNDED :rotating_light: PUT YOUR HANDS UP :rotating_light: ON THE GROUND :rotating_light:**');
+            break;
 
-      // Show help text for /fetchavatar
+      case prefix + '8ball':
+      case (msg.content.match(/\/8ball[a-zA-Z0-9 ]*/) || {}).input:
+          msg.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
+          break;
+   
+   // Show help text for /fetchavatar
       case prefix + 'fetchavatar --help':
           msg.reply('```Bash\nusage: /fetchavatar \nReturns the URL to your Discord-hosted avatar```').catch(console.error);
           break;
@@ -49,14 +89,46 @@ client.on('message', msg => {
       case prefix + 'distro --help':
           msg.reply('```Bash\nusage: /distro <distroname>\nProviding no argument will remove the distro```').catch(console.error);
           break;
+                
+     
 
+     // Add distro
+	distroList.findOrCreate({where:{distro:USERINPUT}}).then((res) => {
+    if(res[1] === false) {
+            //exists
+    } else {
+        //created
+    }
+})
+
+
+    // Check if exists
+       distroList.find({where:{distro:USERINPUT}}).then((res) => {
+    if(res === null) {
+            //false
+    } else {
+        //true
+    }
+})
+
+ 
       // Nickname update handler
       case prefix + 'distro':
       case (msg.content.match(/\/distro[a-zA-Z0-9 ]*/) || {}).input:
           var nickname = msg.content.replace(prefix + 'distro', '').trim();
           newNick = msg.author.username + ' [' + nickname + ']';
 
-          // Remove distro
+           // Check if exists
+       distroList.find({where:{distro:USERINPUT}}).then((res) => {
+    if(res === null) {
+            //false
+    } else {
+        //true
+    }
+})
+
+
+	  // Remove distro
           if (nickname.length === 0) {
               msg.member.setNickname(msg.author.username).catch(console.error);
               msg.reply('Distro removed').catch(console.error);
@@ -69,11 +141,17 @@ client.on('message', msg => {
           }
           // Set distro
           else {
-              msg.member.setNickname(newNick).catch(console.error);
+               distroList.find({where:{distro:USERINPUT}}).then((res) => {
+     		if(res === null) {
+            //false
+
+   	 } else {
+          msg.member.setNickname(newNick).catch(console.error);
               msg.reply('Distro Set').catch(console.error);
-              break;
-          }
-        break;
+         }
+	
+		break;
+	}
 
       //Eval command: extra caution
       case prefix + 'eval':
@@ -121,10 +199,9 @@ client.on('message', msg => {
         banMember.ban().then(member => {
           msg.reply(`${member.user.username} banned.`).catch(console.error);
         }).catch(console.error);
-    } // END Switch
+    } // END Switc
 
   }});
-
 
 
 

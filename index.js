@@ -1,4 +1,10 @@
 const Discord = require('discord.js');
+const sequelize = new Sequelize({
+  dialect: 'sqlite,
+
+  storage: './database.sqlite'
+});
+const Sequelize = require('sequelize');
 const client = new Discord.Client();
 const config = require('./config.json');
 var prefix = '/';
@@ -7,8 +13,8 @@ var rTexel = '288855795951599617';
 var ipad_kid = '293792580376854529';
 var webjocky = '176503593321496577';
 const responses = [
-   'yes', 'no', 'maybe', 'okay', 'sure', 'ask me later', 'naw', 'Most Likely', 'sure', 'Definitely'
-]
+   'yes.', 'no.', 'maybe.', 'okay.', 'Ask me later.', 'Naw.', 'Most Likely.', 'Sure.', 'Definitely.', 'It is likely.', 'Certainly.', 
+];
 
 
 
@@ -52,6 +58,11 @@ client.on('message', msg => {
             msg.delete(0);
             msg.channel.send('**BEEP BOOP :rotating_light: YOU ARE SURROUNDED :rotating_light: PUT YOUR HANDS UP :rotating_light: ON THE GROUND :rotating_light:**');
             break;
+
+      case prefix + '8ball':
+      case (msg.content.match(/\/8ball[a-zA-Z0-9 ]*/) || {}).input:
+          msg.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
+          break;
    
    // Show help text for /fetchavatar
       case prefix + 'fetchavatar --help':
@@ -63,7 +74,9 @@ client.on('message', msg => {
           msg.reply('```Bash\nusage: /distro <distroname>\nProviding no argument will remove the distro```').catch(console.error);
           break;
                 
-      
+     
+
+ 
       // Nickname update handler
       case prefix + 'distro':
       case (msg.content.match(/\/distro[a-zA-Z0-9 ]*/) || {}).input:

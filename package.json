@@ -6,7 +6,8 @@
   "dependencies": {
     "discord.js": "^11.1.0",
     "discordie": "^0.11.0",
-    "mongodb": "^2.2.26"
+    "mongodb": "^2.2.26",
+    "node-google-text-to-speech": "^0.1.0"
   },
   "devDependencies": {
     "jshint": "^2.9.4"
