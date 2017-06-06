@@ -1,4 +1,13 @@
 const Discord = require('discord.js');
+<<<<<<< HEAD
+=======
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+
+  storage: './database.sqlite'
+});
+const Sequelize = require('sequelize');
+>>>>>>> c20091dfbff32a6b4ef9d6b1f4ac113e8344e6d9
 const client = new Discord.Client();
 const config = require('./config.json');
 var prefix = '/';
