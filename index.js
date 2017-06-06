@@ -1,10 +1,4 @@
 const Discord = require('discord.js');
-const sequelize = new Sequelize({
-  dialect: 'sqlite,
-
-  storage: './database.sqlite'
-});
-const Sequelize = require('sequelize');
 const client = new Discord.Client();
 const config = require('./config.json');
 var prefix = '/';
@@ -106,11 +100,10 @@ client.on('message', msg => {
       case prefix + 'eval':
       case (msg.content.match(/\/eval[a-zA-Z0-9 ]*/) || {}).input:
           if (msg.author.id == rTexel || msg.author.id === ipad_kid) {
-              msg.delete(0);
               var evaled = eval(msg.content.replace(prefix + 'eval', '').trim());
               if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
-                msg.reply(evaled).catch(console.error);
+	        msg.channel.send(evaled).catch(console.error);
                 break;
               }
               break;
@@ -130,30 +123,63 @@ client.on('message', msg => {
         }
         break;
 
-      // Ban command
-      case prefix + 'ban':
-      case (msg.content.match(/\/ban[a-zA-Z0-9 ]*/) || {}).input:
-        // Check for users to ban
-        if (msg.mentions.users.size === 0) {
-          return msg.reply('Please mention a user to ban').catch(console.error);
-        }
-        let banMember = msg.guild.member(msg.mentions.members.first());
-        if (!banMember) {
-          return msg.reply('That user does not seem valid');
-        }
-        // Check for permissions
-        if (!msg.guild.member(client.user).hasPermission('BAN_MEMBERS')) {
+     
+
+     // Ban command
+     case prefix + 'ban':
+     case (msg.content.match(/\/ban[a-zA-Z0-9 ]*/) || {}).input:
+     const args = msg.content.split(' ');
+     const user = msg.mentions.users.first();
+     const reason = args.slice(2).join(' ');
+     const modlog = client.channels.find('name', 'mod-logs');
+     if (!msg.member.hasPermission('BAN_MEMBERS')) {
           return msg.reply("You don't have the permissions (BAN_MEMBERS) to do this.").catch(console.error);
-        }
-        banMember.ban().then(member => {
-          msg.reply(`${member.user.username} banned.`).catch(console.error);
-        }).catch(console.error);
-    } // END Switc
+      }
+      if (!modlog) return msg.reply('I cannot find a mod-log channel.');
+      if (reason.length < 1) return msg.reply('No reason? Cmon now, give a reason.');
+      if (msg.mentions.users.size < 1) return msg.reply('Please mention a user to ban.').catch(console.error);
 
-  }});
+      if (!msg.guild.member(user).bannable) return msg.reply('I cannot ban that member.');
+      msg.delete(0);
+      msg.guild.ban(user, 2);
 
+      const embed2 = new Discord.RichEmbed()
+	.setColor(0xFF0000)
+        .setTimestamp()
+        .setThumbnail(user.avatarURL)
+	.addField('User Banned', `${user.username}#${user.discriminator}`)  
+        .addField('Reason for Ban:', reason)
+	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
+      return client.channels.get(modlog.id).send({ embed: embed2 });
+      break;
 
+   //Kick Command
+   case prefix + 'kick':
+   case (msg.content.match(/\/kick[a-zA-Z0-9 ]*/) || {}).input:
+      const args2 = msg.content.split(' ');
+      const modlog2 = client.channels.find('name', 'mod-logs');
+      let user2 = msg.mentions.users.first();
+      const reason2 = args2.slice(2).join(' ');
+      if (!msg.member.hasPermission('KICK_MEMBERS')) {
+          return msg.reply("You don't have the permissions (KICK_MEMBERS) to do this.").catch(console.error);
+      }
+      if (!modlog2) return msg.reply('I cannot find a mod-log channel.');
+      if (reason2.length < 1) return msg.reply('No reason? Cmon now, give a reason.');
+      if (msg.mentions.users.size < 1) return msg.reply('Please mention a user to kick.').catch(console.error);
 
+      if (!msg.guild.member(user2).kickable) return msg.reply('I cannot kick that member.');
+      msg.guild.member(user2).kick();
+
+      const embed = new Discord.RichEmbed()
+	.setColor(0xFF0000)
+        .setTimestamp()
+        .setThumbnail(user2.avatarURL)
+	.addField('User Kicked', `${user2.username}#${user2.discriminator}`)  
+        .addField('Reason for Kick:', reason2)
+	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
+      return client.channels.get(modlog2.id).send({embed});
+  }}});
+ 
 
 // Read Discord token from file
 client.login(config.token);
