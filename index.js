@@ -1,13 +1,10 @@
 const Discord = require('discord.js');
-<<<<<<< HEAD
-=======
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
+//const sequelize = new Sequelize({
+ // dialect: 'sqlite',
 
-  storage: './database.sqlite'
-});
-const Sequelize = require('sequelize');
->>>>>>> c20091dfbff32a6b4ef9d6b1f4ac113e8344e6d9
+ // storage: './database.sqlite'
+//});
+//const Sequelize = require('sequelize');
 const client = new Discord.Client();
 const config = require('./config.json');
 var prefix = '/';
@@ -15,6 +12,7 @@ var token;
 var rTexel = '288855795951599617';
 var ipad_kid = '293792580376854529';
 var webjocky = '176503593321496577';
+var theMasterfire = '160895761230331904';
 const responses = [
    'yes.', 'no.', 'maybe.', 'okay.', 'Ask me later.', 'Naw.', 'Most Likely.', 'Sure.', 'Definitely.', 'It is likely.', 'Certainly.', 
 ];
@@ -24,6 +22,12 @@ const responses = [
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.username}!`);
     client.user.setGame('with a Terminal').catch(console.error);
+});
+
+
+//Join listener 
+client.on('guildMemberAdd', member => {
+    member.send(`Welcome, ${member.user.username} to the Linux Discord Server! Please take some time and read #welcome for important info. We hope you enjoy your time here!`);
 });
 
 // Message Listener & Logic
@@ -112,7 +116,7 @@ client.on('message', msg => {
               var evaled = eval(msg.content.replace(prefix + 'eval', '').trim());
               if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
-	        msg.channel.send(evaled).catch(console.error);
+	        msg.channel.send('```' + evaled + '```').catch(console.error);
                 break;
               }
               break;
@@ -125,7 +129,7 @@ client.on('message', msg => {
       // Say command
       case prefix + 'say':
       case (msg.content.match(/\/say[a-zA-Z0-9 ]*/) || {}).input:
-        if (msg.author.id === rTexel || msg.author.id === ipad_kid) {
+        if (msg.author.id === rTexel || msg.author.id === ipad_kid || msg.author.id === theMasterfire) {
           msg.delete(0);
           msg.channel.send(msg.content.split(" ").slice(1).join(" "));
           break;
@@ -142,7 +146,8 @@ client.on('message', msg => {
      const reason = args.slice(2).join(' ');
      const modlog = client.channels.find('name', 'mod-logs');
      if (!msg.member.hasPermission('BAN_MEMBERS')) {
-          return msg.reply("You don't have the permissions (BAN_MEMBERS) to do this.").catch(console.error);
+         msg.delete(0); 
+         return msg.reply("You don't have the permissions (BAN_MEMBERS) to do this.").catch(console.error);
       }
       if (!modlog) return msg.reply('I cannot find a mod-log channel.');
       if (reason.length < 1) return msg.reply('No reason? Cmon now, give a reason.');
@@ -170,6 +175,7 @@ client.on('message', msg => {
       let user2 = msg.mentions.users.first();
       const reason2 = args2.slice(2).join(' ');
       if (!msg.member.hasPermission('KICK_MEMBERS')) {
+          msg.delete(0);
           return msg.reply("You don't have the permissions (KICK_MEMBERS) to do this.").catch(console.error);
       }
       if (!modlog2) return msg.reply('I cannot find a mod-log channel.');
@@ -177,6 +183,7 @@ client.on('message', msg => {
       if (msg.mentions.users.size < 1) return msg.reply('Please mention a user to kick.').catch(console.error);
 
       if (!msg.guild.member(user2).kickable) return msg.reply('I cannot kick that member.');
+      msg.reply(0);
       msg.guild.member(user2).kick();
 
       const embed = new Discord.RichEmbed()
