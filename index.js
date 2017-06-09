@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
-//const sequelize = new Sequelize({
- // dialect: 'sqlite',
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
 
- // storage: './database.sqlite'
-//});
-//const Sequelize = require('sequelize');
+  storage: './database.sqlite'
+});
 const client = new Discord.Client();
 const config = require('./config.json');
 var prefix = '/';
@@ -17,6 +17,19 @@ const responses = [
    'yes.', 'no.', 'maybe.', 'okay.', 'Ask me later.', 'Naw.', 'Most Likely.', 'Sure.', 'Definitely.', 'It is likely.', 'Certainly.', 
 ];
 
+
+const distroList = sequelize.define('distroList', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    distro: {
+        type: Sequelize.STRING
+    }
+});
+
+distroList.sync();
 
 
 client.on('ready', () => {
@@ -78,19 +91,40 @@ client.on('message', msg => {
 
       // Show help text for /distro
       case prefix + 'distro --help':
-          msg.reply('```Bash\nusage: /distro <distroname>\nProviding no argument will remove the distro```').catch(console.error);
-          break;
+         const embed = new Discord.RichEmbed()
+        .setColor(0x8EE85F)
+        .setTimestamp()
+        .addField('distro', 'Adds your distro to your username.')  
+        .addField('Syntax', '/distro <distroname>') 
+        .addField('Availible Distros:', 'Arch Linux\nArch\nRaspbian Jessie\nUbuntu\nMint\nLinux Mint\nAntergos\nDebian\nManjaro\nopenSUSE\nFedora\nelementaryOS\nCentOS\nKali\nKali Linux\nPuppy Linux\nXubuntu\nKubuntu\nLubuntu\nAndroid\nArchbang\nRemixOS\nRedHat\nUbuntu GNOME\nBlackArch\nOpenBSD\nOracle Linux\nGentoo\nUbuntu Budgie')
+        .setFooter(`Requested by ${msg.author.username}#${msg.author.discriminator}`); 
+        msg.reply({embed});
+       break;
+
                 
      
 
  
       // Nickname update handler
-      case prefix + 'distro':
-      case (msg.content.match(/\/distro[a-zA-Z0-9 ]*/) || {}).input:
+        case prefix + 'distro':
+        case (msg.content.match(/\/distro[a-zA-Z0-9 ]*/) || {}).input:
           var nickname = msg.content.replace(prefix + 'distro', '').trim();
           newNick = msg.author.username + ' [' + nickname + ']';
 
-          // Remove distro
+          // Check if distro exists
+      let args3 = msg.content.split(' ');
+      USERINPUT = args3.slice(1).join(' ');
+      distroList.find({where:{distro:USERINPUT}}).then((res) => {
+    if(res === null) {
+            //false
+    } else {
+        //true
+    }
+});
+
+    
+
+      // Remove distro
           if (nickname.length === 0) {
               msg.member.setNickname(msg.author.username).catch(console.error);
               msg.reply('Distro removed').catch(console.error);
@@ -102,12 +136,17 @@ client.on('message', msg => {
               break;
           }
           // Set distro
-          else {
-              msg.member.setNickname(newNick).catch(console.error);
-              msg.reply('Distro Set').catch(console.error);
-              break;
-          }
-        break;
+         else {
+distroList.find({where:{distro:USERINPUT}}).then((res) => {
+    if(res === null) {
+            msg.reply("Sorry, the distro" + " **" + (USERINPUT) + "**" + " is invalid. If you know it's correct, contact a server admin to get it added." );
+
+     } else {
+          msg.member.setNickname(newNick).catch(console.error);
+              msg.reply("Nickname updated, you have been added to" + ' ' + ("**" + USERINPUT + "**") + ' ' + ":thumbsup:").catch(console.error);
+     }});
+    }
+    break;
 
       //Eval command: extra caution
       case prefix + 'eval':
@@ -116,7 +155,11 @@ client.on('message', msg => {
               var evaled = eval(msg.content.replace(prefix + 'eval', '').trim());
               if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
-	        msg.channel.send('```' + evaled + '```').catch(console.error);
+	       msg.channel.send("Executing...").then(sent => {
+      sent.delete();
+      msg.reply(`Done! Executed in ${sent.createdTimestamp - msg.createdTimestamp}ms`);
+      msg.channel.send('```' + evaled + '```').catch(console.error);
+});
                 break;
               }
               break;
@@ -124,7 +167,6 @@ client.on('message', msg => {
             msg.reply("sorry I can't do that for you.");
             break;
           }
-        break;
 
       // Say command
       case prefix + 'say':
@@ -134,9 +176,10 @@ client.on('message', msg => {
           msg.channel.send(msg.content.split(" ").slice(1).join(" "));
           break;
         }
-        break;
+        break; 
+              
 
-     
+    
 
      // Ban command
      case prefix + 'ban':
@@ -164,7 +207,7 @@ client.on('message', msg => {
 	.addField('User Banned', `${user.username}#${user.discriminator}`)  
         .addField('Reason for Ban:', reason)
 	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-      return client.channels.get(modlog.id).send({ embed: embed2 });
+        client.channels.get(modlog.id).send({ embed: embed2 });
       break;
 
    //Kick Command
@@ -186,17 +229,21 @@ client.on('message', msg => {
       msg.reply(0);
       msg.guild.member(user2).kick();
 
-      const embed = new Discord.RichEmbed()
+      const embed3 = new Discord.RichEmbed()
 	.setColor(0xFF0000)
         .setTimestamp()
         .setThumbnail(user2.avatarURL)
 	.addField('User Kicked', `${user2.username}#${user2.discriminator}`)  
         .addField('Reason for Kick:', reason2)
 	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-      return client.channels.get(modlog2.id).send({embed});
-  }}});
- 
+      return client.channels.get(modlog2.id).send({embed: embed3 });
+  
+ }}
 
+
+});
+
+ 
 // Read Discord token from file
-client.login(config.token);
-client.on('debug', console.log);
+client.login(config.token)
+client.on('debug', console.log)
