@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>GUI Discord Bot</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="Script/Main.js"></script>
+<link rel="stylesheet" href="Script/Main.css">
+  <script src="http://alexschneider.github.io/pushbullet-js/pushbullet.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    function stopRKey(evt) {
+      var evt = (evt) ? evt : ((event) ? event : null);
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+      if ((evt.keyCode == 13) && (node.type == "text")) {
+        setStatus()
+        return false;
+      }
+    }
+    document.onkeypress = stopRKey;
+  </script>
+</head>
+  <body style="overflow:hidden; margin:0; color:white">
+    <form id="form1" runat="server">
+      <div id="main" style="background-color:#23272a">
+        <div id="content" style="overflow:hidden; margin:0">
+          <center>
+            <div>
+              <h1>Welcome to GUIBot</h1>
+            </div>
+            <div>
+              <form>
+                <input type="text" id="status" placeholder="Sucking at UI">
+                <input type="button" name="submit" id="submit" value="Set Playing" onclick="setStatus()">
+              </form>
+              <p>
+                <br>
+                Moods:
+              </p>
+              <div class="radio">
+              <form action="">
+  <input type="radio" name="mood" value="online"> Online<br>
+  <input type="radio" name="mood" value="idle"> Away<br>
+  <input type="radio" name="mood" value="dnd"> Do Not Disturb<br>
+  <input type="radio" name="mood" value="invisible"> Invisible<br>
+  <input type="button" name="setMood" id="setMood" value="Set Mood" onclick="setDMood()">
+</form>
+</div>
+<br>
+<p>
+  Password:
+</p>
+<input type="text" id="code" placeholder="1337">
+            </div>
+
+          </center>
+        </div>
+      </div>
+    </form>
+    <script language="javascript">
+      function autoResizeDiv() {
+        document.getElementById('main').style.height = window.innerHeight + 'px';
+      }
+      window.onresize = autoResizeDiv;
+      autoResizeDiv();
+    </script>
+  </body>
+</html>
