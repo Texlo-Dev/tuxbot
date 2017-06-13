@@ -18,8 +18,8 @@
     "jshint": "^2.9.4"
   },
   "scripts": {
-    "start": "node index.js",
-    "test": "./node_modules/jshint/bin/jshint index.js"
+    "start": "node tuxbot.js",
+    "test": "./node_modules/jshint/bin/jshint tuxbot.js"
   },
   "jshintConfig": {
     "esversion": "6"
