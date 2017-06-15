@@ -48,3 +48,19 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
 
 8. Start using tuxbot!
 
+**Moonix installation**
+1. Follow steps 1-4 above, instead rename the bot to something else.
+
+2. In the `moonix/` folder, create a `tokens.json` file with the following info and save it:
+```json
+{
+    "d_token" : "your token here",
+	"adminID" : "your ID",
+    "prefix" : "whatever prefix you'd like"
+}
+```
+3. Start Moonix with `node moosik.js` or `pm2 start moosik.js`
+4. Enjoy the bot! To see the help options, just run <prefix> help (Make sure the prefix is different that Tuxbot's or they will conflict)
+
+I hope you enjoy the bots!
+
