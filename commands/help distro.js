@@ -24,7 +24,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: "help,distro",
+  name: "help-distro",
   description: "shows help info",
   usage: "",
   usageDelim: "",

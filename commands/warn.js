@@ -25,7 +25,7 @@ warnList.sync();
 exports.run = async (client, msg, [warnUser, points, ...reason]) => {
 
   const modlog = client.channels.find('name', 'mod-logs');
-  if (!msg.member.hasPermission('KICK_MEMBERS')) return msg.reply("You don't perms to warn people.").catch(console.error);
+  if (!msg.member.hasPermission('KICK_MEMBERS')) return msg.reply("You don't have perms to warn people.").catch(console.error);
   if (!modlog) return msg.reply('I cannot find a mod-log channel.').catch(console.error);
   msg.delete(0);
   
@@ -49,6 +49,11 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
     .addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
   
   modlog.send({embed});
+ 
+  if (totalPoints > 799) {
+     msg.guild.ban(warnUser)
+  }
+
 };
 
 exports.conf = {

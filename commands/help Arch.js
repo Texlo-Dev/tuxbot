@@ -15,7 +15,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: "help_arch",
+  name: "help-arch",
   description: "Shows the Arch installation guide.",
   usage: "",
   usageDelim: "",

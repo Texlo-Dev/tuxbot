@@ -9,7 +9,7 @@ console.log(__filename);
       .setColor(0x8EE85F)
       .setTimestamp()
       .addField('Commands List', "These comamnds are availible to you here:")
-      .addField("Core",  'distro, help, help,distro, help,Arch, userinfo')
+      .addField("Core",  'distro, help, help-distro, help-arch, userinfo')
       .addField("Fun", "8ball, quiz, catfacts, coinflip, insult")
       .addField("Mod utilites", "warnpoints")
       .setFooter(`Requested by ${msg.author.tag}`)
@@ -20,7 +20,7 @@ console.log(__filename);
       .setColor(0x8EE85F)
       .setTimestamp()
       .addField('Commands List', "These commands are availible to you here:")
-      .addField("Core",  'distro, help, help,distro, help,Arch, userinfo')
+      .addField("Core",  'distro, help, help-distro, help-arch, userinfo')
       .addField("Fun", "8ball, quiz, catfacts, coinflip, insult, fortune")
       .addField("Mod utilites", "warnpoints, warn, kick, ban, eval")
       .setFooter(`Requested by ${msg.author.tag}`);
