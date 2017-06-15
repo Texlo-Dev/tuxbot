@@ -9,11 +9,11 @@
   },
   "modRole": {
     "type": "String",
-    "data": "Mods"
+    "data": "Moderators"
   },
   "adminRole": {
     "type": "String",
-    "data": "Devs"
+    "data": "Administrators"
   },
   "lang": {
     "type": "String",

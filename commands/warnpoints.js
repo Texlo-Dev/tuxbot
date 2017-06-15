@@ -29,11 +29,11 @@ exports.run  = (client, msg) => {
     warnList.find({where:{userID:userSnowflake}}).then((res) => {
         if (res === null) { 
             msg.delete(0);
-            msg.reply('You have **0** warnpoints.');
+            msg.reply('You have **0** warning points.');
         } else {
           if (res.warnpoints)
              msg.delete(0);  
-             msg.reply("You have" + ' ' + '**' + res.warnpoints  + '**' + ' ' + "warnpoints.").catch(console.error);
+             msg.reply("You have" + ' ' + '**' + res.warnpoints  + '**' + ' ' + "warning points.").catch(console.error);
         }
     });
 

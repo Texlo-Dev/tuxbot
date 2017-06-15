@@ -6,7 +6,7 @@ exports.run = (client, msg, prefix) => {
         .setColor(0x8EE85F)
         .setTimestamp()
         .addField('distro', 'Adds your distro to your username.')  
-        .addField('Syntax', prefix  + 'distro <distroname>') 
+        .addField('Syntax', "!distro <distroname>") 
         .addField('Availible Distros:', 'Arch Linux\nArch\nRaspbian Jessie\nUbuntu\nMint\nLinux Mint\nAntergos\nDebian\nManjaro\nopenSUSE\nFedora\nelementaryOS\nCentOS\nKali\nKali Linux\nPuppy Linux\nXubuntu\nKubuntu\nLubuntu\nAndroid\nArchbang\nRemixOS\nRedHat\nUbuntu GNOME\nBlackArch\nOpenBSD\nOracle Linux\nGentoo\nUbuntu Budgie')
         .setFooter(`Requested by ${msg.author.username}#${msg.author.discriminator}`); 
         msg.author.send({embed});
@@ -24,7 +24,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: "help_distro",
+  name: "help,distro",
   description: "shows help info",
   usage: "",
   usageDelim: "",
