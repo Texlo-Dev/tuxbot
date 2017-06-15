@@ -29,19 +29,22 @@ And many more!
 1. Create a new bot application at http://discordapp.com/developers/applications/me, and get the token. If you don't know how to do this, follow this guide:https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token
 Name it whatever you want. If you want Tux's logo, look in the master directory for `Tux.png`.
 
-2. Clone the repo using by either downloading the zip or running `git clone https://github.com/RTK99/tuxbot.git`
+2. Find the client ID on the page, and generate an invite link with this website: https://discordapi.com/permissions.html.
+Make sure you select `Administrator`. Then, click the link at the bottom and add it to your server.
 
-3. Run `npm i` to install all of the required modules.
+3. Clone the repo using by either downloading the zip or running `git clone https://github.com/RTK99/tuxbot.git`
 
-4. Create a config.json file in the master directory and have it look like this: 
+4.Run `npm i` to install all of the required modules.
+
+5. Create a config.json file in the master directory and have it look like this: 
 ```json
 {
  "token": "youre token here"
 }
 ```
-5. Optional: edit the prefix in `tuxbot.js`.
+6. Optional: edit the prefix in `tuxbot.js`.
 
-6. Start the bot with `npm start` or `pm2 start tuxbot.js` if you're using PM2.
+7. Start the bot with `npm start` or `pm2 start tuxbot.js` if you're using PM2.
 
-7. Start using tuxbot!
+8. Start using tuxbot!
 
