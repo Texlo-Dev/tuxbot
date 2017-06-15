@@ -3,4 +3,4 @@ npm-debug.log
 resources*/
 node_modules*/
 *tokens.json
-warnpoints.sqlite
+*warnpoints.sqlite
