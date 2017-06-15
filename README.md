@@ -4,6 +4,7 @@ A Komada-based bot coded in node.js
 Tuxbot, originally on the Linux Discord server, is now officially released!
 
 **Features**
+
 `kick`- kick a user from the guild
 
 `ban`- bans a user from the guild.
@@ -24,7 +25,9 @@ Tuxbot, originally on the Linux Discord server, is now officially released!
 And many more!
 
 **Installation**
+
 1. Clone the repo: `git clone https://github.com/RTK99/tuxbot.git`
+
 2. Create a config.json and have it look like this: 
 ```json
 {
