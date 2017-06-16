@@ -5,9 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "discord.js": "^11.1.0",
-    "discordie": "^0.11.0",
     "komada": "^0.19.2",
-    "mongodb": "^2.2.26",
     "node-google-text-to-speech": "^0.1.0",
     "opusscript": "0.0.3",
     "sequelize": "^4.1.0",
