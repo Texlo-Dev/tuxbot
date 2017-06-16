@@ -39,7 +39,7 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
 5. Create a config.json file in the master directory and have it look like this: 
 ```json
 {
- "token": "youre token here"
+ "token": "your token here"
 }
 ```
 6. Optional: edit the prefix in `tuxbot.js`.
