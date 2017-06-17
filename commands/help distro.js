@@ -7,7 +7,7 @@ exports.run = (client, msg, prefix) => {
         .setTimestamp()
         .addField('distro', 'Adds your distro to your username.')  
         .addField('Syntax', "!distro <distroname>") 
-        .addField('Availible Distros:', 'Arch Linux\nArch\nRaspbian Jessie\nUbuntu\nMint\nLinux Mint\nAntergos\nDebian\nManjaro\nopenSUSE\nFedora\nelementaryOS\nCentOS\nKali\nKali Linux\nPuppy Linux\nXubuntu\nKubuntu\nLubuntu\nAndroid\nArchbang\nRemixOS\nRedHat\nUbuntu GNOME\nBlackArch\nOpenBSD\nOracle Linux\nGentoo\nUbuntu Budgie')
+        .addField('Availible Distros:', 'Android\nAntergos\nArch\nArchbang\nArch Linux\nBlackArch\nCentOS\nDebian\nelementaryOS\nFedora\nGentoo\nKali\nKali Linux\nKubuntu\nLinux Mint\nLubuntu\nManjaro\nMint\nOpenBSD\nopenSUSE\nOracle Linux\nPuppy Linux\nRaspbian Jessie\nRedHat\nRemixOS\nUbuntu\nUbuntu Budgie\nUbuntu GNOME\nXubuntu')
         .setFooter(`Requested by ${msg.author.username}#${msg.author.discriminator}`); 
         msg.author.send({embed});
         msg.reply('Sent a DM :thumbsup:');
