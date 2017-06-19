@@ -1,3 +1,5 @@
+https://travis-ci.org/RTK99/tuxbot.svg?branch=master
+
 # tuxbot + Moonix
 A Komada-based bot coded in node.js
 
