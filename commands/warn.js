@@ -33,7 +33,7 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
   if(!dbEntry) {
     dbEntry = await warnList.create({userID:warnUser.id, warnpoints: points});
   } else {
-   totalPoints = dbEntry.warnpoints + points;
+  let totalPoints = dbEntry.warnpoints + points;
    userSnowflake = dbEntry.userID
     warnList.update({warnpoints:totalPoints}, {where: {userID: warnUser.id}}).catch(console.error)
   }
@@ -49,10 +49,24 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
     .addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
   
   modlog.send({embed});
- 
-  if (totalPoints > 799) {
-     msg.guild.ban(warnUser)
+
+
+  totalPoints = dbEntry.warnpoints + points; 
+  var kickNum = 400
+
+  if (dbEntry.warnpoints < kickNum && totalPoints > kickNum) {
+    warnUser.send('You have exceeded the soft limit for warnpoints here, and have been kicked from the server. You are welcome to rejoin, but understand that the next action is a ban.').then(() => {
+    msg.guild.member(warnUser).kick();
+   });
+  } 
+
+
+   if (totalPoints > 799) {
+     warnUser.send('You have exceeded the hard limit for warnpoints here, and have been banned from the Discord chat.').then(() => {
+     msg.guild.ban(warnUser);
+    });
   }
+
 
 };
 

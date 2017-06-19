@@ -49,11 +49,11 @@ exports.run = (client, msg, prefix) => {
          else {
 distroList.find({where:{distro:USERINPUT}}).then((res) => {
     if(res === null) {
-            msg.reply("Sorry, the distro" + " **" + (USERINPUT) + "**" + " is invalid. If you know it's correct, contact a server admin to get it added." );
+            msg.reply(`Sorry, the distro **${USERINPUT}** is invalid. If you know it's correct, contact a server admin to get it added.`);
 
      } else {
           msg.member.setNickname(newNick).catch(console.error);
-              msg.reply("Nickname updated, you have been added to" + ' ' + ("**" + USERINPUT + "**") + ' ' + ":thumbsup:").catch(console.error);
+              msg.reply(`Nickname updated, you have been added to **${USERINPUT}** :thumbsup:`).catch(console.error);
      }});
 }};
 

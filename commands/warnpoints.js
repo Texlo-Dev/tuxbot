@@ -33,7 +33,7 @@ exports.run  = (client, msg) => {
         } else {
           if (res.warnpoints)
              msg.delete(0);  
-             msg.reply("You have" + ' ' + '**' + res.warnpoints  + '**' + ' ' + "warning points.").catch(console.error);
+             msg.reply(`You have **${res.warnpoints}** warning points.`).catch(console.error);
         }
     });
 
