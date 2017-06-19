@@ -1,4 +1,4 @@
-![alt tag](https://travis-ci.org/RTK99/tuxbot.svg?branch=master)
+[![Build Status](https://travis-ci.org/RTK99/tuxbot.svg?branch=master)](https://travis-ci.org/RTK99/tuxbot)
 
 # tuxbot + Moonix
 A Komada-based bot coded in node.js
