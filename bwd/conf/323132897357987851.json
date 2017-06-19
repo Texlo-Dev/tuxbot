@@ -9,12 +9,12 @@
     "type": "Array"
   },
   "modRole": {
-    "data": "Moderators",
+    "data": "Mod",
     "type": "String",
     "possibles": []
   },
   "adminRole": {
-    "data": "Administrators",
+    "data": "Admin",
     "type": "String",
     "possibles": []
   },
