@@ -38,7 +38,7 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
     warnList.update({warnpoints:totalPoints}, {where: {userID: warnUser.id}}).catch(console.error)
   }
   
-  warnUser.send(`You have been issued **${points}** warning points for the following reason: ${reason}`);
+  warnUser.send(`You have been issued **${points}** warning points for the following reason: ${reason}`)
   const embed = new Discord.RichEmbed()
     .setColor(0xFF0000)
     .setTimestamp()
@@ -47,26 +47,7 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
     .addField('Points:', points)
     .addField('Reason:', reason)
     .addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-  
-  modlog.send({embed});
-
-
-  totalPoints = dbEntry.warnpoints + points; 
-  var kickNum = 400
-
-  if (dbEntry.warnpoints < kickNum && totalPoints > kickNum) {
-    warnUser.send('You have exceeded the soft limit for warnpoints here, and have been kicked from the server. You are welcome to rejoin, but understand that the next action is a ban.').then(() => {
-    msg.guild.member(warnUser).kick();
-   });
-  } 
-
-
-   if (totalPoints > 799) {
-     warnUser.send('You have exceeded the hard limit for warnpoints here, and have been banned from the Discord chat.').then(() => {
-     msg.guild.ban(warnUser);
-    });
-  }
-
+    modlog.send({embed}).catch(console.error);
 
 };
 

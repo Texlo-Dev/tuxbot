@@ -1,17 +1,29 @@
 const Discord = require('discord.js');
+const dateFormat = require('dateformat');
 exports.run = (client, msg) => {
 
- let user3 = msg.author;
+let user = msg.author;
+let member = msg.guild.member(user);
+let roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
+   if (roles.length < 1) roles = ['None'];
+const millisCreated = new Date().getTime() - user.createdAt.getTime();
+const daysCreated = millisCreated/1000/60/60/24;
+const millisJoined = new Date().getTime() - member.joinedAt.getTime();
+const daysJoined = millisJoined/1000/60/60/24;
+
  const embed5 = new Discord.RichEmbed() 
      .setColor(0x8EE85F)
      .setTimestamp() 
-     .setThumbnail(`${user3.displayAvatarURL}`) 
-     .addField("User:", `${user3.tag}`)
-     .addField("Status:", `${user3.presence.status}`)
-     .addField("Join Date:", `${msg.guild.member(user3).joinedAt}`) 
-     .addField("Account Created:", `${user3.createdAt}`) 
-     .addField("Playing:", user3.presence.game ? user3.presence.game.name : 'Not playing a game.') 
-     .setFooter(`${user3.id}`); 
+     .setThumbnail(`${user.displayAvatarURL}`) 
+     .addField("User:", `${user.tag}`, true)
+     .addField("Playing:", user.presence.game ? user.presence.game.name : 'Not playing a game.', true) 
+      .addField("Status:", `${user.presence.status}`, true)
+     .addField('Days since joining:', `${daysJoined.toFixed(0)}`, true) 
+     .addField("Join Date:", `${dateFormat(member.joinedAt)}`, true)
+     .addField('Days Since Creation:', `${daysCreated.toFixed(0)}`, true)
+     .addField("Account Created:", `${dateFormat(user.createdAt)}`)
+     .addField('Roles', `${roles.join(', ')}`, true)  
+     .setFooter(`${user.id}`); 
      msg.channel.send( {embed: embed5} ).catch(console.error);
 };
 

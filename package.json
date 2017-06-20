@@ -1,35 +1,22 @@
 {
-  "name": "ric1",
+  "name": "tuxbot-indev",
   "version": "1.0.0",
-  "description": "Bot for Linux Discord",
-  "main": "index.js",
-  "dependencies": {
-    "discord.js": "^11.1.0",
-    "komada": "^0.19.2",
-    "node-google-text-to-speech": "^0.1.0",
-    "opusscript": "0.0.3",
-    "sequelize": "^4.1.0",
-    "sqlite": "^2.8.0",
-    "ytdl-core": "^0.14.4"
-  },
-  "devDependencies": {
-    "jshint": "^2.9.4"
-  },
+  "description": "A discord bot",
+  "main": "app.js",
   "scripts": {
-    "start": "node tuxbot.js",
-    "test": "./node_modules/jshint/bin/jshint tuxbot.js"
-  },
-  "jshintConfig": {
-    "esversion": "6"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "bugs": {
-    "url": ""
-  },
-  "homepage": ""
+  "dependencies": {
+    "dateformat": "^2.0.0",
+    "discord.js": "^11.1.0",
+    "komada": "github:dirigeants/komada#indev",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "sequelize": "^4.1.0",
+    "soupselect": "^0.2.0",
+    "sqlite": "^2.8.0",
+    "xmlhttprequest": "^1.8.0"
+  }
 }
