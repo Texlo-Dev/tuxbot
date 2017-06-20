@@ -2,17 +2,18 @@
   "name": "tuxbot-indev",
   "version": "1.0.0",
   "description": "A discord bot",
-  "main": "app.js",
+  "main": "start.js",
   "scripts": {
-    "test": "jshint app.js"
+    "test": "jshint start.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "dateformat": "^2.0.0",
     "discord.js": "^11.1.0",
     "jshint": "^2.9.4",
     "komada": "github:dirigeants/komada#indev",
+    "promisify": "0.0.3",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "sequelize": "^4.1.0",

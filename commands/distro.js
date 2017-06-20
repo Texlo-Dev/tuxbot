@@ -2,7 +2,9 @@ const Sequelize = require('sequelize');
 const distros = new Sequelize({
   dialect: 'sqlite',
 
-  storage: './database.sqlite'
+  storage: './database.sqlite',
+
+  logging: false
 });
 
 const distroList = distros.define('distroList', {

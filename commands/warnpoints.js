@@ -3,7 +3,9 @@ const Sequelize = require('sequelize');
 const warnpoints = new Sequelize({
   dialect: 'sqlite',
 
-  storage: './warnpoints.sqlite'
+  storage: './warnpoints.sqlite',
+
+  logging: false
 });
 
 const warnList = warnpoints.define('warnList', {
