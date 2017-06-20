@@ -10,7 +10,7 @@ console.log(__filename);
       .setTimestamp()
       .addField('Commands List', "These comamnds are availible to you here:")
       .addField("Core",  'distro, help, help-distro, help-arch, userinfo, serverinfo, invite')
-      .addField("Fun", "8ball, quiz, catfacts, coinflip, fortune")
+      .addField("Fun", "8ball, catfacts, coinflip, fortune")
       .addField("Mod utilites", "warnpoints")
       .setFooter(`Requested by ${msg.author.tag}`)
       msg.channel.send( {embed: embed4}).catch(console.error);
@@ -21,7 +21,7 @@ console.log(__filename);
       .setTimestamp()
       .addField('Commands List', "These commands are availible to you here:")
       .addField("Core",  'distro, help, help-distro, help-arch, userinfo, serverinfo, invite')
-      .addField("Fun", "8ball, quiz, catfacts, coinflip, insult, fortune, image")
+      .addField("Fun", "8ball, catfacts, coinflip, insult, fortune, image")
       .addField("Mod utilites", "warnpoints, warn, kick, ban, purge")
       .setFooter(`Requested by ${msg.author.tag}`);
       msg.channel.send( {embed: embed4}).catch(console.error);

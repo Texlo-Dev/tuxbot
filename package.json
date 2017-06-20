@@ -4,7 +4,7 @@
   "description": "A discord bot",
   "main": "start.js",
   "scripts": {
-    "test": "jshint start.js"
+    "test": "echo no test specified"
   },
   "author": "",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "dateformat": "^2.0.0",
     "discord.js": "^11.1.0",
     "jshint": "^2.9.4",
-    "komada": "github:dirigeants/komada#indev",
+    "komada": "github:dirigeants/komada#config-rewrite",
     "promisify": "0.0.3",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",

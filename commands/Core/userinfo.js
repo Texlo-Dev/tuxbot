@@ -14,7 +14,7 @@ const daysJoined = millisJoined/1000/60/60/24;
  const embed5 = new Discord.RichEmbed() 
      .setColor(0x8EE85F)
      .setTimestamp() 
-     .setThumbnail(`${user.displayAvatarURL}`) 
+     .setThumbnail(`${user.displayAvatarURL('png')}`)
      .addField("User:", `${user.tag}`, true)
      .addField("Playing:", user.presence.game ? user.presence.game.name : 'Not playing a game.', true) 
       .addField("Status:", `${user.presence.status}`, true)
@@ -25,6 +25,7 @@ const daysJoined = millisJoined/1000/60/60/24;
      .addField('Roles', `${roles.join(', ')}`, true)  
      .setFooter(`${user.id}`); 
      msg.channel.send( {embed: embed5} ).catch(console.error);
+     console.log(user.avatarURL)
 };
 
 

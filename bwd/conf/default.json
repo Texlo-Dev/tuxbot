@@ -1,1 +1,1 @@
-{"prefix":{"type":"String","data":"!"},"disabledCommands":{"type":"Array","data":[]},"modRole":{"type":"String","data":"Moderators"},"adminRole":{"type":"String","data":"Administrators"},"lang":{"type":"String","data":"en"}}
+{"prefix":{"type":"String","data":"tux"},"disabledCommands":{"type":"Array","data":[]},"modRole":{"type":"String","data":"Moderators"},"adminRole":{"type":"String","data":"Administrators"},"lang":{"type":"String","data":"en"}}

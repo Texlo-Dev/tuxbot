@@ -4,5 +4,5 @@ exports.conf = {
 };
 
 exports.run = (client, msg, cmd) => {
- if (cmd.help.name === "warn" && msg.guild.id !== "304606245132697600") return "This command is disabled for this guild.";
+ if (cmd.help.name === "warn" && msg.guild.id !== "304606245132697600") return "That command is disabled for this guild.";
 };

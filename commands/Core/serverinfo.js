@@ -11,7 +11,7 @@ exports.run = (client, msg) => {
   const embed = new Discord.RichEmbed()
   .addField(`${server.name}`, "*Server info*")
   .setTimestamp()
-  .setThumbnail(`${server.iconURL}`)
+  .setThumbnail(`${server.iconURL('png')}`)
   .setColor(0x8EE85F)
   .addField('Created on:', `${dateFormat(server.createdAt)}`, true)
   .addField('Days since creation:', `${days.toFixed(0)}`, true)

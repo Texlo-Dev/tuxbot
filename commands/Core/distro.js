@@ -22,7 +22,7 @@ distroList.sync();
 
 exports.run = (client, msg, prefix) => {
 
-        var nickname = msg.content.replace('!distro', '').trim();
+        var nickname = msg.content.replace('tuxdistro', '').trim();
           newNick = msg.author.username + ' [' + nickname + ']';
 
           // Check if distro exists
