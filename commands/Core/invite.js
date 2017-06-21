@@ -1,4 +1,4 @@
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 msg.channel.send('Add me to your server!: https://discordapp.com/oauth2/authorize?client_id=304629953054507018&scope=bot&permissions=8')
 };
 

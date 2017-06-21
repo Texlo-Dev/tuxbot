@@ -2,7 +2,7 @@ var request = require("request-promise");
 var select = require('soupselect').select,
     htmlparser = require("htmlparser");
 var useragentmoz = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 OPR/45.0.2552.898";
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
   const args = msg.content.split(' ').join();
   var url = "https://www.google.fi/search?site=imghp&tbm=isch&source=hp&biw=1680&bih=940&q=" +  args+"&oq=" + args;
   var options = {

@@ -20,7 +20,7 @@ const distroList = distros.define('distroList', {
 
 distroList.sync();
 
-exports.run = (client, msg, prefix) => {
+exports.run = async (client, msg, prefix) => {
 
         var nickname = msg.content.replace('tuxdistro', '').trim();
           newNick = msg.author.username + ' [' + nickname + ']';

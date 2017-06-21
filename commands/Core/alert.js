@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 
      if (!msg.member.hasPermission('BAN_MEMBERS')) {
          return;

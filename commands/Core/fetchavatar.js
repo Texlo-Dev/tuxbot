@@ -1,4 +1,4 @@
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 
   msg.reply(msg.author.avatarURL('png')).catch(console.error);
 };

@@ -1,4 +1,4 @@
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
  
  let showRole = msg.guild.roles.find('name', 'Showcase Contestant');
  msg.member.addRole(showRole);

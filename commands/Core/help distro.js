@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 
-exports.run = (client, msg, prefix) => {
+exports.run = async (client, msg, prefix) => {
 
  const embed = new Discord.RichEmbed()
         .setColor(0x8EE85F)
         .setTimestamp()
         .addField('distro', 'Adds your distro to your username.')  
-        .addField('Syntax', "!distro <distroname>") 
+        .addField('Syntax', "./distro <distroname>") 
         .addField('Availible Distros:', 'Android\nAntergos\nArch\nArchbang\nArch Linux\nBlackArch\nCentOS\nDebian\nelementaryOS\nFedora\nGentoo\nKali\nKali Linux\nKubuntu\nLinux Mint\nLubuntu\nManjaro\nMint\nOpenBSD\nopenSUSE\nOracle Linux\nPuppy Linux\nRaspbian Jessie\nRedHat\nRemixOS\nUbuntu\nUbuntu Budgie\nUbuntu GNOME\nXubuntu')
         .setFooter(`Requested by ${msg.author.username}#${msg.author.discriminator}`); 
         msg.author.send({embed});

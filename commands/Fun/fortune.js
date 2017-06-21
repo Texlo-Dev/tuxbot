@@ -1,5 +1,5 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "http://fortunecookieapi.herokuapp.com/v1/cookie", false ); // false for synchronous request

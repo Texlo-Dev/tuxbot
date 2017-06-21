@@ -2,7 +2,7 @@ const dateFormat = require('dateformat');
 const now = new Date();
 dateFormat(now, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
 const Discord = require('discord.js');
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
   
   const millis = new Date().getTime() - msg.guild.createdAt.getTime();
   const days = millis/1000/60/60/24;

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const dateFormat = require('dateformat');
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 
 let user = msg.author;
 let member = msg.guild.member(user);

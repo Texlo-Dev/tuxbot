@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 
      const user = msg.mentions.users.first();
      const args = msg.content.split(' ');

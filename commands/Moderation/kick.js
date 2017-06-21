@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-exports.run = (client, msg)  => {
+exports.run = async (client, msg)  => {
 
       let args = msg.content.split(' ')     
       const modlog = client.channels.find('name', 'mod-logs');

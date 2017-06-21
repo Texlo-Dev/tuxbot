@@ -5,12 +5,9 @@ var webjocky = '176503593321496577';
 var theMasterfire = '160895761230331904';
 
 
-exports.run = (client, msg) => {
-
-      if (msg.author.id === rTexel || msg.author.id === ipad_kid || msg.author.id === theMasterfire) {
-          msg.delete(0);
-          msg.channel.send(msg.content.split(" ").slice(1).join(" "));
-     }
+exports.run = async (client, msg) => {
+     msg.delete(0);
+     msg.channel.send(msg.content.split(" ").slice(1).join(" "));
 };
 
 
@@ -18,7 +15,7 @@ exports.conf = {
   enabled: true,
   runIn: ["text"],
   aliases: [],
-  permLevel: 10,
+  permLevel: 4,
   botPerms: [],
   requiredFuncs: [],
   cooldown: 0,

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 
    msg.channel.send("Official Arch install guide: https://wiki.archlinux.org/index.php/Installation_guide");
 };

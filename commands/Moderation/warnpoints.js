@@ -25,7 +25,7 @@ const warnList = warnpoints.define('warnList', {
 warnList.sync();
 
 
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 
     const userSnowflake = msg.author.id
     warnList.find({where:{userID:userSnowflake}}).then((res) => {
