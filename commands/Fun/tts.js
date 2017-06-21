@@ -1,5 +1,5 @@
   var download = require('download-file');
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 	const args = msg.content.split(' ').join();
 	var url = "http://api.voicerss.org/?key=a796fa1425af4454a5b6103eda9c1703&hl=en-us&src=" + mesg; // Get your own key if you want :)
 	var download = require('download-file');
