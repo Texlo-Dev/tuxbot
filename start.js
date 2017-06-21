@@ -3,7 +3,7 @@ const config = require('./config.json');
 
 const client = new Komada.Client({
   ownerID: "288855795951599617",
-  prefix: "tux",
+  prefix: "./",
   clientOptions: {
     fetchAllMembers: true,
   },

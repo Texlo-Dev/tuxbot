@@ -26,7 +26,7 @@ warnList.sync();
 
 exports.run = async (client, msg, [warnUser, points, ...reason]) => {
 
-  const modlog = client.channels.find('name', 'mod-logs');
+  const modlog = client.channels.find('name', 'mod-logs');;
   if (!msg.member.hasPermission('KICK_MEMBERS')) return msg.reply("You don't have perms to warn people.").catch(console.error);
   if (!modlog) return msg.reply('I cannot find a mod-log channel.').catch(console.error);
   msg.delete(0);
@@ -44,12 +44,12 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
   const embed = new Discord.RichEmbed()
     .setColor(0xFF0000)
     .setTimestamp()
-    .setThumbnail(warnUser.displayAvatarURL)
+    .setThumbnail(warnUser.displayAvatarURL('png'))
     .addField('User Warned', `${warnUser.username}#${warnUser.discriminator}`)
     .addField('Points:', points)
     .addField('Reason:', reason)
     .addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-    modlog.send({embed}).catch(console.error);
+   return client.channels.get('327047440072966144').send({embed}).catch(console.error);
 
 };
 

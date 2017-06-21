@@ -4,7 +4,7 @@ exports.run = async (client, msg) => {
     const res = await rp.get("http://catfacts-api.appspot.com/api/facts").then(JSON.parse);
     msg.channel.send(`📢 **Catfact:** *${res.facts[0]}*`);
   } catch (e) {
-    client.funcs.log(e, "error");
+    console.log(e, "error");
   }
 };
 

@@ -26,10 +26,11 @@ exports.run = (client, msg) => {
       const embed = new client.methods.Embed()
 	.setColor(0xFF0000)
         .setTimestamp()
-        .setThumbnail(user.avatarURL)
+        .setThumbnail(user.displayAvatarURL('png'))
 	.addField('User Banned', `${user.username}#${user.discriminator}`)  
         .addField('Reason for Ban:', reason)
 	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
+         modlog.send({embed}).catch(console.error);
 };
 
 

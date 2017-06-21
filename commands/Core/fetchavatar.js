@@ -1,6 +1,6 @@
 exports.run = (client, msg) => {
 
-  msg.reply(msg.author.avatarURL).catch(console.error);
+  msg.reply(msg.author.avatarURL('png')).catch(console.error);
 };
 
 exports.conf = {

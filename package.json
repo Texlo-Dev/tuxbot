@@ -16,6 +16,7 @@
     "promisify": "0.0.3",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
+    "request-promise-native": "^1.0.4",
     "sequelize": "^4.1.0",
     "soupselect": "^0.2.0",
     "sqlite": "^2.8.0",

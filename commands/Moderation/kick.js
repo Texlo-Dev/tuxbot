@@ -21,11 +21,11 @@ exports.run = (client, msg)  => {
       const embed = new Discord.RichEmbed()
 	.setColor(0xFF0000)
         .setTimestamp()
-        .setThumbnail(user.avatarURL)
+        .setThumbnail(user.displayAvatarURL('png'))
 	.addField('User Kicked', `${user.username}#${user.discriminator}`)  
         .addField('Reason for Kick:', reason)
 	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-      return client.channels.get(modlog.id).send({embed});
+        modlog.send({embed}).catch(console.error);
 };
 
 exports.conf = {
