@@ -4,7 +4,7 @@
   "description": "A discord bot",
   "main": "start.js",
   "scripts": {
-    "test": "echo no test specified"
+    "test": "node start.js"
   },
   "author": "",
   "license": "MIT",
