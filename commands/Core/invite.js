@@ -1,5 +1,12 @@
+const Discord = require('discord.js');
 exports.run = async (client, msg) => {
-msg.channel.send('Add me to your server!: https://discordapp.com/oauth2/authorize?client_id=304629953054507018&scope=bot&permissions=8')
+  const embed = new Discord.RichEmbed()
+  .setTitle('Invites')
+  .setColor(0x8EE85F)
+  .setThumbnail('https://cdn.discordapp.com/avatars/304629953054507018/9e32915c30c3b681d972232c259bc0f2.png?size=2048')
+  .addField('If you want Tux to be part of your server,',  '[Click here!](https://discordapp.com/oauth2/authorize?client_id=304629953054507018&scope=bot&permissions=8)')
+  .addField('If you would like to join the Linux Discord server, where it all started:', '[Linux Discord Server](http://discord.gg/Xcn9yVK)');
+  msg.channel.send({embed});
 };
 
 exports.conf = {

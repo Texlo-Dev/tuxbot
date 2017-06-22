@@ -7,11 +7,12 @@ var options = {
 exports.run = async (client, msg, [message]) => {
     var url = "http://api.voicerss.org/?key=a796fa1425af4454a5b6103eda9c1703&hl=en-us&src=" + message; // Get your own key if you want :)
     download(url, options, function(err){
-    if (err) throw err;
-    console.log("meow");
+    if (err) {
+    console.log(err)
+    }
     msg.delete();
     if(msg.member.voiceChannel) {
-      msg.member.voiceChannel.join()
+     // msg.member.voiceChannel.join()
       msg.member.voiceChannel.join().then(connection =>{
       const dispatcher = connection.playFile('./message.mp3');
 	dispatcher.on("end",function () {

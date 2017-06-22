@@ -9,9 +9,10 @@ exports.run = async (client, msg, [meme]) => {
   });
 
     let memeDir = "./commands/Fun/memes";
-    msg.channel.sendFile(`${memeDir}/${meme}.png`).catch(err => {
+    msg.delete(5000)
+    msg.channel.sendFile(`${memeDir}/${meme}.png`).catch(error => {
      return msg.reply("That meme doesn't exist.") 
-    console.log(err);  
+    console.log(error);  
     });
 };
 
@@ -27,8 +28,8 @@ exports.conf = {
 
 exports.help = {
   name: "meme",
-  description: "sends a meme to a channel.",
+  description: "Sends a meme to your current channel.",
   usage: "<meme:string>",
   usageDelim: " ",
-  extendedHelp: "",
+  extendedHelp: "Available memes: archinstallwoes, banned, dell, gnulinux, googleit, noo, pleb",
 };
