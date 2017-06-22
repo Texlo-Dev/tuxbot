@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/RTK99/tuxbot.svg?branch=master)](https://travis-ci.org/RTK99/tuxbot)
 [![Discord](https://discordapp.com/api/guilds/304606245132697600/embed.png)](http://discord.gg/Xcn9yVK)
 
-# tuxbot + Moonix
+# tuxbot
 A Komada-based bot coded in node.js
 
 Tuxbot, originally on the Linux Discord server, is now officially released!
@@ -24,8 +24,13 @@ Tuxbot, originally on the Linux Discord server, is now officially released!
 
 `userinfo`- Shows some info about the user.
 
+**Music**
+`play`- play a song added to the queue.
+`add`- add a song to the queue
+`queue`- get the current queue.
+`musichelp`- get more info on the music commands.
 
-And many more!
+And many more to come!
 
 **Installation**
 
@@ -47,25 +52,11 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
  "token": "your token here"
 }
 ```
-6. Optional: edit the prefix in `tuxbot.js`.
+6. Optional: edit the prefix in `start`.
 
-7. Start the bot with `npm start` or `pm2 start tuxbot.js` if you're using PM2.
+7. Start the bot with `npm start` or `pm2 start start.js` if you're using PM2.
 
 8. Start using tuxbot!
 
-**Moonix installation**
-1. Follow steps 1-4 above, instead rename the bot to something else.
 
-2. In the `moonix/` folder, create a `tokens.json` file with the following info and save it:
-```json
-{
-    "d_token" : "your token here",
-	"adminID" : "your ID",
-    "prefix" : "whatever prefix you'd like"
-}
-```
-3. Start Moonix with `node moosik.js` or `pm2 start moosik.js`
-4. Enjoy the bot! To see the help options, just run <prefix> help (Make sure the prefix is different that Tuxbot's or they will conflict)
-
-I hope you enjoy the bots!
 
