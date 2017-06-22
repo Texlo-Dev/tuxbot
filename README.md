@@ -27,6 +27,7 @@ Tuxbot, originally on the Linux Discord server, is now officially released!
 And many more!
 
 **Installation**
+**IMPORTANT: This bot will not work with node versions lower than 8.1.2. Please make sure your node version is up-to-date.**
 
 1. Create a new bot application at http://discordapp.com/developers/applications/me, and get the token. If you don't know how to do this, follow this guide:https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token
 Name it whatever you want. If you want Tux's logo, look in the master directory for `Tux.png`.
