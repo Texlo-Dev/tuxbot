@@ -9,8 +9,10 @@ exports.run = async (client, msg, [meme]) => {
     let memeDir = "./commands/Fun/memes";
     if (meme === memeName) {
     msg.delete(5)
-    msg.channel.sendFile(`${memeDir}/${file}`).catch(err => msg.reply("That meme doesn't exist."));
-   }});
+    msg.channel.sendFile(`${memeDir}/${file}`).catch(err => { 
+    msg.reply("That meme doesn't exist.");
+   });
+  }});
  });
 
 };
