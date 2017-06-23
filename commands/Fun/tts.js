@@ -1,28 +1,17 @@
+const snekfetch = require('snekfetch');
+const fs = require('fs')
 const Discord = require('discord.js')
-var download = require('download-file');
-var options = {
-    directory: "./",
-    filename: "message.mp3"
-}
 exports.run = async (client, msg, [message]) => {
-    var url = "http://api.voicerss.org/?key=a796fa1425af4454a5b6103eda9c1703&hl=en-us&src=" + message; // Get your own key if you want :)
-    download(url, options, function(err){
-    if (err) {
-    console.log(err)
-    }
-    msg.delete();
-    if(msg.member.voiceChannel) {
-     // msg.member.voiceChannel.join()
-      msg.member.voiceChannel.join().then(connection =>{
+    await snekfetch.get("http://api.voicerss.org/?key=f793a701dcb1450aabf2cffce0ca00a5&hl=en-us&src=" + message)
+    .then(r => fs.writeFileSync('./message.mp3', r.body))
+    msg.delete()
+    msg.member.voiceChannel.join().then(connection =>{
       const dispatcher = connection.playFile('./message.mp3');
 	dispatcher.on("end",function () {
            msg.member.voiceChannel.leave();
         });
     });
-
-  }
-});
-}
+};
 exports.conf = {
   enabled: true,
   runIn: ["text"],
@@ -40,3 +29,4 @@ exports.help = {
   usageDelim: "  ",
   extendedHelp: "",
 };
+

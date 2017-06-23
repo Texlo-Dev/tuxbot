@@ -4,18 +4,16 @@ exports.run = async (client, msg, [meme]) => {
     if (err) return console.error(err);
     files.forEach(file => {
     let memeFile = fs.readFileSync(`./commands/Fun/memes/${file}`);
-    let meme = file.split(".")[0];
-   });
-  });
+    let memeName = file.split(".")[0];
 
     let memeDir = "./commands/Fun/memes";
-    msg.delete(5000)
-    msg.channel.sendFile(`${memeDir}/${meme}.png`).catch(error => {
-     return msg.reply("That meme doesn't exist.") 
-    console.log(error);  
-    });
-};
+    if (meme === memeName) {
+    msg.delete(5)
+    msg.channel.sendFile(`${memeDir}/${file}`).catch(err => msg.reply("That meme doesn't exist."));
+   }});
+ });
 
+};
 exports.conf = {
   enabled: true,
   runIn: ["text"],

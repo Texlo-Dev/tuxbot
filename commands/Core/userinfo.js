@@ -2,8 +2,15 @@ const Discord = require('discord.js');
 const dateFormat = require('dateformat');
 exports.run = async (client, msg) => {
 
-let user = msg.author;
-let member = msg.guild.member(user);
+var user;
+let member = msg.mentions.users.first();
+    let author = msg.author; 
+    if(member) {
+         user = member;
+    } else {
+         user = author;
+    }
+member = msg.guild.member(user);
 let roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
    if (roles.length < 1) roles = ['None'];
 const millisCreated = new Date().getTime() - user.createdAt.getTime();

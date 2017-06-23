@@ -1,4 +1,4 @@
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 	if (client.queue[msg.guild.id] === undefined) return msg.channel.send(`Add some songs to the queue first with ${client.config.prefix}add`);
 	const tosend = client.queue[msg.guild.id].songs.map((song, i) => `${i + 1}. ${song.title} - Requested by: ${song.requester}`);
 	return msg.channel.send([

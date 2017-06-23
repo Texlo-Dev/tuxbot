@@ -1,4 +1,4 @@
-exports.run = (client, msg) => {
+exports.run = async (client, msg) => {
 	const tosend = [
 		`${client.config.prefix}join : "Join Voice channel of msg sender"`,
 		`${client.config.prefix}add : "Add a valid youtube link to the queue"`,

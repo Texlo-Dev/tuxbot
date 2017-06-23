@@ -1,6 +1,6 @@
 const yt = require('ytdl-core');
 
-exports.run = (client, msg, [song]) => {
+exports.run = async (client, msg, [song]) => {
 	if (!client.hasOwnProperty('queue')) client.queue = {};
 	yt.getInfo(song, (err, info) => {
 		if (err) return msg.channel.send(`Invalid YouTube Link: ${err}`);

@@ -26,18 +26,28 @@ warnList.sync();
 
 
 exports.run = async (client, msg) => {
+let member = msg.mentions.users.first();
+    let author = msg.author; 
+    if(member && msg.member.hasPermission('BAN_MEMBERS')) {
+         user = member;
+    } else {
+         user = author;
+    }
 
-    const userSnowflake = msg.author.id
+    const userSnowflake = user.id
     warnList.find({where:{userID:userSnowflake}}).then((res) => {
         if (res === null) { 
             msg.delete(0);
             msg.reply('You have **0** warning points.');
-        } else {
-          if (res.warnpoints)
+        } else if (res === null && member) {
+             msg.delete(0);
+             msg.reply(`${member.user.username} has **${res.warnpoints}** warning points.`);
+       } else { 
+          if (res.warnpoints) {
              msg.delete(0);  
              msg.reply(`You have **${res.warnpoints}** warning points.`).catch(console.error);
         }
-    });
+     }});
 
 }
 
