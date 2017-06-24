@@ -1,24 +1,17 @@
 const snekfetch = require('snekfetch')
 const fs = require('fs')
-exports.run = async (client, msg) => {
-const args = msg.content.split(' ')
-   args[1] = args.slice(2)
-   args[2] = args.slice(3)
-   let memeName = args[1]
-   let link = args[2]
-   if (!memeName) return msg.reply('Please specify a meme name.')
-   if (!link) return msg.reply('Please provide a valid meme link.')
-
-  await snekfetch.get(`${link}`)
-  .pipe(fs.createWriteStream(`./commands/Fun/meme/${memeName}.png`)) 
-  msg.reply('Meme successfully added.');
+exports.run = async (client, msg, [memeName, linkURL]) => {
+ const extension = linkURL.split('.')[3]
+  snekfetch.get(`${linkURL}`)
+  .then(r => fs.writeFile(`./commands/Fun/memes/${memeName}.${extension}`, r.body)) 
+  msg.reply(`Meme "${memeName}" successfully added.`).catch(console.error);
 };
 
 exports.conf = {
-  enabled: false,
+  enabled: true,
   runIn: ["text"],
   aliases: [],
-  permLevel: 0,
+  permLevel: 2,
   botPerms: [],
   requiredFuncs: [],
   cooldown: 0,
@@ -27,7 +20,7 @@ exports.conf = {
 exports.help = {
   name: "addmeme",
   description: "adds a meme to the collection.",
-  usage: "",
+  usage: "<memeName:str> <linkURL:str>",
   usageDelim: " ",
   extendedHelp: "",
 };

@@ -18,7 +18,7 @@ exports.run = async (client, msg) => {
 				msg.member.voiceChannel.leave();
 			});
 		}
-		msg.channel.send(`🎧 Playing: **${song.title}** as requested by: **${song.requester}**`);
+		msg.channel.send(`:white_check_mark: Playing: **${song.title}** as requested by: **${song.requester}**`);
 		dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes: OhGodConfig.passes });
 		const collector = msg.channel.createMessageCollector(message => message);
 		collector.on('collect', m => { // eslint-disable-line id-length
