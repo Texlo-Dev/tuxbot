@@ -1,4 +1,4 @@
-exports.run = async (client, msg, [message]) => {
+exports.run = async (client, msg) => {
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "http://random.cat/meow", false ); // false for synchronous request
