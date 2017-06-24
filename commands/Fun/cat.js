@@ -7,3 +7,20 @@ exports.run = async (client, msg, [message]) => {
 	msg.channel.send("Cat: " + obj.file);
 	
 }
+exports.conf = {
+  enabled: true,
+  runIn: ["text"],
+  aliases: [],
+  permLevel: 0,
+  botPerms: [],
+  requiredFuncs: [],
+  cooldown: 0,
+};
+
+exports.help = {
+  name: "cat",
+  description: "Get a random picture of a cat.",
+  usage: "",
+  usageDelim: "",
+  extendedHelp: "",
+};
