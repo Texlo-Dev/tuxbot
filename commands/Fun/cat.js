@@ -1,5 +1,5 @@
 exports.run = async (client, msg) => {
-
+   var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "http://random.cat/meow", false ); // false for synchronous request
     xmlHttp.send( null );

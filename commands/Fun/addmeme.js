@@ -6,12 +6,11 @@ const args = msg.content.split(' ')
    args[2] = args.slice(3)
    let memeName = args[1]
    let link = args[2]
-   let extension = link.split('.')[1]  
    if (!memeName) return msg.reply('Please specify a meme name.')
    if (!link) return msg.reply('Please provide a valid meme link.')
 
   await snekfetch.get(`${link}`)
-  .pipe(fs.createWriteStream(`${memeName}.${extension}`)) 
+  .pipe(fs.createWriteStream(`./commands/Fun/meme/${memeName}.png`)) 
   msg.reply('Meme successfully added.');
 };
 
