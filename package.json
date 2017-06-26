@@ -4,7 +4,7 @@
   "description": "A discord bot",
   "main": "start.js",
   "scripts": {
-    "test": "echo All good!"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -43,7 +43,7 @@
     "jshint": "^2.9.4",
     "komada": "github:dirigeants/komada#config-rewrite",
     "mongodb": "^2.2.29",
-    "node-opus": "file:node-opus",
+    "node-opus": "^0.2.6",
     "opusscript": "0.0.3",
     "performance-now": "^2.1.0",
     "promisify": "0.0.3",
