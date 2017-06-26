@@ -52,11 +52,21 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
  "token": "your token here"
 }
 ```
-6. Optional: edit the prefix in `start`.
+6. Open up `start.js` and replace my ID in `ownerID:` with your ID.
+
+7. Optional: Change the prefix in`prefix:` to whatever you'd like.
 
 7. Start the bot with `npm start` or `pm2 start start.js` if you're using PM2.
 
-8. Start using tuxbot!
+**Configuration**
+
+To properly set up the modRole and adminRole for commands: Do the following: 
+
+In a server, type `./conf set modRole <nameofModRole>` followed by `./conf set adminRole <nameofAdminRole>` to finish setup.
+
+
+
+
 
 
 
