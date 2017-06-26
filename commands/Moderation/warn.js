@@ -26,7 +26,7 @@ warnList.sync();
 
 exports.run = async (client, msg, [warnUser, points, ...reason]) => {
 
-  const modlog = client.channels.find('name', 'mod-logs');;
+  const modlog = msg.guild.channels.find('name', 'mod-logs');
   if (!msg.member.hasPermission('KICK_MEMBERS')) return msg.reply("You don't have perms to warn people.").catch(console.error);
   if (!modlog) return msg.reply('I cannot find a mod-log channel.').catch(console.error);
   msg.delete(0);
@@ -49,8 +49,10 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
     .addField('Points:', points)
     .addField('Reason:', reason)
     .addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-   return client.channels.get('327047440072966144').send({embed}).catch(console.error);
-
+    modlog.send({embed}).catch(console.error)
+   console.log(embed)
+  console.log(modlog)
+  console.log(dbEntry)
 };
 
 exports.conf = {
@@ -66,7 +68,7 @@ exports.conf = {
 exports.help = {
   name: "warn",
   description: "warns a user.",
-  usage: "<warnMember:user> <point:int> <reason:string> [...]",
+  usage: "<warnMember:user> <points:int> <reason:string> [...]",
   usageDelim: " ",
   extendedHelp: "",
 };

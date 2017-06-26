@@ -4,7 +4,7 @@ exports.run = async (client, msg) => {
      const user = msg.mentions.users.first();
      const args = msg.content.split(' ');
      const reason = args.slice(2).join(' ');
-     const modlog = client.channels.find('name', 'mod-logs');
+     const modlog = msg.guild.channels.find('name', 'mod-logs');
      if (!msg.member.hasPermission('BAN_MEMBERS')) {
          msg.delete(0); 
          return msg.reply("You don't have the permissions (BAN_MEMBERS) to do this.").catch(console.error);
@@ -21,16 +21,17 @@ exports.run = async (client, msg) => {
 
       if (!msg.guild.member(user).bannable) return msg.reply('I cannot ban that member.');
       msg.delete(0);
-      msg.guild.ban(user);
-
-      const embed = new client.methods.Embed()
+      user.send(`You have been banned from this server for the following reason: **${reason}**. If you feel like this was unjust, feel free to appeal this ban, by contacting **${msg.author.tag}**, who issued this ban.`).then(() => {
+       msg.guild.ban(user)
+       const embed = new client.methods.Embed()
 	.setColor(0xFF0000)
         .setTimestamp()
         .setThumbnail(user.displayAvatarURL('png'))
 	.addField('User Banned', `${user.username}#${user.discriminator}`)  
         .addField('Reason for Ban:', reason)
 	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-         modlog.send({embed}).catch(console.error);
+        msg.guild.channels.get(modlog.id).send({embed}).catch(console.error);
+     });
 };
 
 

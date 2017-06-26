@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 exports.run = async (client, msg)  => {
 
       let args = msg.content.split(' ')     
-      const modlog = client.channels.find('name', 'mod-logs');
+      const modlog = msg.guild.channels.find('name', 'mod-logs');
       let user = msg.mentions.users.first();
       args[2] = args.slice(2).join(' ')
       const reason = args[2]
@@ -16,16 +16,17 @@ exports.run = async (client, msg)  => {
 
       if (!msg.guild.member(user).kickable) return msg.reply('I cannot kick that member.');
       msg.delete(0);
-      msg.guild.member(user).kick();
-
-      const embed = new Discord.RichEmbed()
-	.setColor(0xFF0000)
+      user.send(`You have been kicked from the server for the following reason: ${reason}. You are free to rejoin, but understand that the next action is a ban.`).then(() => {
+         msg.guild.member(user).kick()
+         const embed = new Discord.RichEmbed()
+       	.setColor(0xFF0000)
         .setTimestamp()
         .setThumbnail(user.displayAvatarURL('png'))
 	.addField('User Kicked', `${user.username}#${user.discriminator}`)  
         .addField('Reason for Kick:', reason)
 	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-        modlog.send({embed}).catch(console.error);
+        msg.guild.channels.get(modlog.id).send({embed}).catch(console.error);
+      });
 };
 
 exports.conf = {

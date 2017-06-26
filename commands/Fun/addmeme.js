@@ -1,9 +1,10 @@
 const snekfetch = require('snekfetch')
 const fs = require('fs')
 exports.run = async (client, msg, [memeName, linkURL]) => {
- const extension = linkURL.split('.')[3]
+ const urlarray = linkURL.split('.');
+ const ext = urlarray[urlarray.length - 1];
   snekfetch.get(`${linkURL}`)
-  .then(r => fs.writeFile(`./commands/Fun/memes/${memeName}.${extension}`, r.body)) 
+  .then(r => fs.writeFile(`./commands/Fun/memes/${memeName}.${ext}`, r.body)) 
   msg.reply(`Meme "${memeName}" successfully added.`).catch(console.error);
 };
 
