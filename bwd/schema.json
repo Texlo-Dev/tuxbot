@@ -1,1 +1,0 @@
-{"prefix":{"type":"String","default":"./","array":false},"modRole":{"type":"Role","default":null,"array":false},"adminRole":{"type":"Role","default":null,"array":false},"disabledCommands":{"type":"Command","default":[],"array":true}}
