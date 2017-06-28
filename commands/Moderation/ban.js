@@ -1,3 +1,34 @@
+const Sequelize = require('sequelize')
+const cases = new Sequelize({
+  dialect: 'sqlite',
+
+  storage: './sqlite/cases.sqlite',
+
+  logging: false
+});
+
+const caseList = cases.define('caseList', {
+  caseNum: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  userID: {
+    type: Sequelize.STRING
+  },
+  action: {
+    type: Sequelize.STRING
+  },
+  modID: {
+    type: Sequelize.STRING
+  },
+  reasonFor: {
+    type: Sequelize.STRING
+  }
+});
+
+caseList.sync();
+
 const Discord = require('discord.js');
 exports.run = async (client, msg) => {
 
@@ -21,7 +52,8 @@ exports.run = async (client, msg) => {
 
       if (!msg.guild.member(user).bannable) return msg.reply('I cannot ban that member.');
       msg.delete(0);
-      user.send(`You have been banned from this server for the following reason: **${reason}**. If you feel like this was unjust, feel free to appeal this ban, by contacting **${msg.author.tag}**, who issued this ban.`).then(() => {
+      caseList.create({userID: user.id, action:'ban', modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt}).then((res) => { 
+     user.send(`You have been banned from this server for the following reason: **${reason}**. If you feel like this was unjust, feel free to appeal this ban, by contacting **${msg.author.tag}**, who issued this ban.`)
        msg.guild.ban(user)
        const embed = new client.methods.Embed()
 	.setColor(0xFF0000)
@@ -29,9 +61,11 @@ exports.run = async (client, msg) => {
         .setThumbnail(user.displayAvatarURL('png'))
 	.addField('User Banned', `${user.username}#${user.discriminator}`)  
         .addField('Reason for Ban:', reason)
-	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
+	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`)
+        .setFooter(`Case#${res.caseNum}`);
         msg.guild.channels.get(modlog.id).send({embed}).catch(console.error);
      });
+     
 };
 
 

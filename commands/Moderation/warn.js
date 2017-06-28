@@ -1,28 +1,11 @@
 const Discord = require('discord.js');
+const dir = '/home/richrancy/tuxbot'
 const Sequelize = require('sequelize');
-const warnpoints = new Sequelize({
-  dialect: 'sqlite',
-
-  storage: './warnpoints.sqlite',
-
-  logging: false
-});
-
-const warnList = warnpoints.define('warnList', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  userID: {
-    type: Sequelize.STRING
-  },
-  warnpoints: {
-    type: Sequelize.INTEGER
-  }
-});
-
-warnList.sync();
+const config = require(`${dir}/config.json`)
+const { cases } = require('../../settings/mysql_case-db.js')
+const { caseList } = require('../../settings/caseList.js')
+const { warnpoints } = require('../../settings/mysql_wp-db.js') 
+const { warnList } = require('../../settings/warnList.js')
 
 exports.run = async (client, msg, [warnUser, points, ...reason]) => {
 
@@ -31,28 +14,36 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
   if (!modlog) return msg.reply('I cannot find a mod-log channel.').catch(console.error);
   msg.delete(0);
   
-  let dbEntry = await warnList.find({where:{userID:warnUser.id}});
+  let dbEntry = await warnList.find({where:{userID:warnUser.id, guildID:msg.guild.id}});
   if(!dbEntry) {
-    dbEntry = await warnList.create({userID:warnUser.id, warnpoints: points});
+    dbEntry = await warnList.create({guildID:msg.guild.id, userID:warnUser.id, warnpoints: points});
   } else {
   let totalPoints = dbEntry.warnpoints + points;
    userSnowflake = dbEntry.userID
-    warnList.update({warnpoints:totalPoints}, {where: {userID: warnUser.id}}).catch(console.error)
-  }
+    warnList.find({where:{guildID: msg.guild.id}}).then((res) => {
+      if (res === null) {
+        warnList.create({guildID:msg.guild.id, userID:warnUser.id, warnpoints: points})
+      } else {
+        warnList.update({warnpoints:totalPoints}, {where: {userID: warnUser.id, guildID: msg.guild.id}}).catch(console.error)
+      }});
+   }
   
-  warnUser.send(`You have been issued **${points}** warning points for the following reason: ${reason}`)
-  const embed = new Discord.RichEmbed()
+  reasonStr = reason.slice(',').join(' ')
+  warnUser.send(`You have been issued **${points}** warning points by **${msg.author.username}** for the following reason: ${reasonStr}`)
+ console.log(require('util').inspect({userID: warnUser.id, action:`${points} warning points`, modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt})) 
+ caseList.create({userID: warnUser.id, action:`${points} warning points`, modID: msg.author.id, reasonFor: reason.join(' '), createdAt: msg.createdAt}).then((res) => {
+   var reasonString = reason.join(' ')
+   const embed = new Discord.RichEmbed()
     .setColor(0xFF0000)
     .setTimestamp()
-    .setThumbnail(warnUser.displayAvatarURL('png'))
-    .addField('User Warned', `${warnUser.username}#${warnUser.discriminator}`)
+    .setThumbnail(warnUser.displayAvatarURL({}))
+    .addField('User Warned', `${warnUser.tag}`)
     .addField('Points:', points)
-    .addField('Reason:', reason)
-    .addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
-    modlog.send({embed}).catch(console.error)
-   console.log(embed)
-  console.log(modlog)
-  console.log(dbEntry)
+    .addField('Reason:', reasonString)
+    .addField('Moderator:', `${msg.author.tag}`)
+    .setFooter(`Case#${res.caseNum}`)
+     modlog.send({embed}).catch(console.error)
+   });
 };
 
 exports.conf = {

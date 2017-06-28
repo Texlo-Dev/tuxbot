@@ -21,9 +21,10 @@ const distroList = distros.define('distroList', {
 distroList.sync();
 
 exports.run = async (client, msg, [distroName]) => {
-    msg.reply(`Distro **${distroName}** successfully added to the database.`).then(() => {
-      distroList.create({distro:distroName})
-   });
+       const dist = await distroList.destroy({where:{distro: distroName}});
+       if (!dist) return msg.reply("Er...that distro didn't exist. Please specify a valid distro to delete.");
+   
+       return msg.reply(`Successfully deleted **${distroName}** from the database.`);
 };
 
 exports.conf = {
@@ -37,9 +38,9 @@ exports.conf = {
 };
 
 exports.help = {
-  name: "adddistro",
-  description: "adds a distro to the database.",
+  name: "rmdistro",
+  description: "Deletes a distro from the database.",
   usage: "<distroName:str>",
-  usageDelim: " ",
+  usageDelim: "",
   extendedHelp: "",
 };

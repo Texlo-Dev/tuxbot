@@ -4,7 +4,7 @@ require('node-opus');
 
 exports.run = async (client, msg) => {
 	if (client.queue[msg.guild.id] === undefined) return msg.channel.send(`Add some songs to the queue first with ${client.config.prefix}add`);
-	if (!msg.guild.voiceConnection) return client.commands.get('join').run(client, msg).then(() => client.commands.get('play').run(client, msg));
+	if (!msg.guild.voiceConnection) return client.commands.get('join').run(client, msg).then(() => client.commands.get('play').run(client, msg)).catch(err => { throw err; });
 	if (client.queue[msg.guild.id].playing) return msg.channel.send('Already Playing');
 	let dispatcher;
 	client.queue[msg.guild.id].playing = true;
@@ -13,7 +13,7 @@ exports.run = async (client, msg) => {
 	(function play(song) {
 		console.log(song);
 		if (song === undefined) {
-			return msg.channel.send('⏹ Queue is empty').then(() => {
+			return msg.channel.send('<:dnd:313956276893646850> Queue is empty').then(() => {
 				client.queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
 			});
@@ -23,11 +23,11 @@ exports.run = async (client, msg) => {
 		const collector = msg.channel.createMessageCollector(message => message);
 		collector.on('collect', m => { // eslint-disable-line id-length
 			if (m.content.startsWith(`${client.config.prefix}pause`)) {
-				return msg.channel.send('⏸ Paused').then(() => { dispatcher.pause(); });
+				return msg.channel.send('<:away:313956277220802560>  Paused').then(() => { dispatcher.pause(); });
 			} else if (m.content.startsWith(`${client.config.prefix}resume`)) {
-				return msg.channel.send('▶ Resumed').then(() => { dispatcher.resume(); });
+				return msg.channel.send('<:online:313956277808005120> Resumed').then(() => { dispatcher.resume(); });
 			} else if (m.content.startsWith(`${client.config.prefix}skip`)) {
-				return msg.channel.send('⏭ Skipped').then(() => { dispatcher.end(); });
+				return msg.channel.send('<:offline:313956277237710868> Skipped!').then(() => { dispatcher.end(); });
 			} else if (m.content.startsWith('volume+')) {
 				if (Math.round(dispatcher.volume * 50) >= 100) return msg.channel.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`);
 				dispatcher.setVolume(Math.min(((dispatcher.volume * 50) + (2 * (m.content.split('+').length - 1))) / 50, 2));

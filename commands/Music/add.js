@@ -3,7 +3,7 @@ const yt = require('ytdl-core');
 exports.run = async (client, msg, [song]) => {
 	if (!client.hasOwnProperty('queue')) client.queue = {};
 	yt.getInfo(song, (err, info) => {
-		if (err) return msg.channel.send(`Invalid YouTube Link: ${err}`);
+		if (err) return msg.channel.send(`<:dnd:313956276893646850> Invalid YouTube Link: ${err}`);
 		if (!client.queue.hasOwnProperty(msg.guild.id)) {
 			client.queue[msg.guild.id] = {
 				playing: false,

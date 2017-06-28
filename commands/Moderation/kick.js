@@ -1,3 +1,35 @@
+const Sequelize = require('sequelize')
+const cases = new Sequelize({
+  dialect: 'sqlite',
+
+  storage: './sqlite/cases.sqlite',
+
+  logging: false
+});
+
+const caseList = cases.define('caseList', {
+  caseNum: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  userID: {
+    type: Sequelize.STRING
+  },
+  action: {
+    type: Sequelize.STRING
+  },
+  modID: {
+    type: Sequelize.STRING
+  },
+  reasonFor: {
+    type: Sequelize.STRING
+  }
+});
+
+caseList.sync();
+
+
 const Discord = require('discord.js');
 exports.run = async (client, msg)  => {
 
@@ -16,15 +48,17 @@ exports.run = async (client, msg)  => {
 
       if (!msg.guild.member(user).kickable) return msg.reply('I cannot kick that member.');
       msg.delete(0);
-      user.send(`You have been kicked from the server for the following reason: ${reason}. You are free to rejoin, but understand that the next action is a ban.`).then(() => {
-         msg.guild.member(user).kick()
+      user.send(`You have been kicked from the server for the following reason: ${reason}. You are free to rejoin, but understand that the next action is a ban.`)
+        caseList.create({userID: user.id, action:'kick', modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt}).then((res) => {  
+        msg.guild.member(user).kick()
          const embed = new Discord.RichEmbed()
        	.setColor(0xFF0000)
         .setTimestamp()
         .setThumbnail(user.displayAvatarURL('png'))
 	.addField('User Kicked', `${user.username}#${user.discriminator}`)  
         .addField('Reason for Kick:', reason)
-	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`);
+	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`)
+        .setFooter(`Case#${res.caseNum}`)
         msg.guild.channels.get(modlog.id).send({embed}).catch(console.error);
       });
 };
