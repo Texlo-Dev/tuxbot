@@ -72,11 +72,11 @@ Delete `mysql` and replace it with `sqlite`.
 
 10. Open `caseList.js` and change it look like this:
 ```js
-  const { Sequelize, cases } = require('sqlite_case-db.js')
+  const { Sequelize, cases } = require('sqlite-case.js')
   ```
   And for `warnList.js`, it should look like this:
   ```js
-  const { Sequelize, warnpoints } = require('./mysql_wp-db.js')
+  const { Sequelize, warnpoints } = require('sqlite-wp.js')
   ```
 11. Optional: Change the prefix in`prefix:` to whatever you'd like.
 
