@@ -5,6 +5,6 @@ node_modules*/
 *tokens.json
 *warnpoints.sqlite
 inhibitors*/
-settings/mysql_case-db.js
-settings/mysql_wp-db.js
+mysql_case-db.js
+mysql_wp-db.js
 tuxbot_backup.sql
