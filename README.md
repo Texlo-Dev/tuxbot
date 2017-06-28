@@ -54,9 +54,30 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
 ```
 6. Open up `start.js` and replace my ID in `ownerID:` with your ID.
 
-7. Optional: Change the prefix in`prefix:` to whatever you'd like.
+7. This is very important: Go to `commands/Moderation` and look for the file `warn.js`. Inside of that, look for these lines: 
 
-7. Start the bot with `npm start` or `pm2 start start.js` if you're using PM2.
+```js
+  const { cases } = require('../../settings/mysql_case-db.js')
+  const { warnpoints } = require('../../settings/mysql_wp-db.js') 
+```
+Delete `mysql` and replace it with `sqlite`. 
+
+8. Repeat Step 7 for `warnpoints.js`, and `case.js`.
+
+9. Navigate to `settings/`(In the root directory) and find these files: `caseList.js` and `warnList.js`. 
+
+10. Open `caseList.js` and change it look like this:
+```js
+  const { Sequelize, cases } = require('sqlite_case-db.js')
+  ```
+  And for `warnList.js`, it should look like this:
+  ```js
+  const { Sequelize, warnpoints } = require('./mysql_wp-db.js')
+  ```
+11. Optional: Change the prefix in`prefix:` to whatever you'd like.
+
+
+12. Start the bot with `npm start` or `pm2 start start.js` if you're using PM2.
 
 **Configuration**
 
