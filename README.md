@@ -25,9 +25,13 @@ Tuxbot, originally on the Linux Discord server, is now officially released!
 `userinfo`- Shows some info about the user.
 
 **Music**
+
 `play`- play a song added to the queue.
+
 `add`- add a song to the queue
+
 `queue`- get the current queue.
+
 `musichelp`- get more info on the music commands.
 
 And many more to come!
@@ -44,7 +48,7 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
 
 3. Clone the repo using by either downloading the zip or running `git clone https://github.com/RTK99/tuxbot.git`
 
-4.Run `npm i` to install all of the required modules.
+4. Run `npm i` to install all of the required modules.
 
 5. Create a config.json file in the master directory and have it look like this: 
 ```json
