@@ -64,7 +64,7 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
   const { cases } = require('../../settings/mysql_case-db.js')
   const { warnpoints } = require('../../settings/mysql_wp-db.js') 
 ```
-Delete `mysql` and replace it with `sqlite`. 
+Delete `mysql_case-db` and replace it with `sqlite-case`. For `{ warnpoints }` replace that with `sqlite-wp`
 
 8. Repeat Step 7 for `warnpoints.js`, and `case.js`.
 
