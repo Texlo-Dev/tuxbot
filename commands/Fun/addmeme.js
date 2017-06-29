@@ -5,7 +5,7 @@ exports.run = async (client, msg, [memeName, linkURL]) => {
  const ext = urlarray[urlarray.length - 1];
   snekfetch.get(`${linkURL}`)
   .then(r => fs.writeFile(`./commands/Fun/memes/${memeName}.${ext}`, r.body)) 
-  msg.reply(`Meme "${memeName}" successfully added.`).catch(console.error);
+  msg.reply(`:inbox_tray: Meme "${memeName}" successfully added.`).catch(console.error);
 };
 
 exports.conf = {

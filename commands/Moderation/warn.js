@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
-const dir = '/home/richrancy/tuxbot'
 const Sequelize = require('sequelize');
-const config = require(`${dir}/config.json`)
+const config = require('../../config.json')
 const { cases } = require('../../settings/mysql_case-db.js')
 const { caseList } = require('../../settings/caseList.js')
 const { warnpoints } = require('../../settings/mysql_wp-db.js') 

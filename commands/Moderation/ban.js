@@ -1,33 +1,8 @@
 const Sequelize = require('sequelize')
-const cases = new Sequelize({
-  dialect: 'sqlite',
-
-  storage: './sqlite/cases.sqlite',
-
-  logging: false
-});
-
-const caseList = cases.define('caseList', {
-  caseNum: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  userID: {
-    type: Sequelize.STRING
-  },
-  action: {
-    type: Sequelize.STRING
-  },
-  modID: {
-    type: Sequelize.STRING
-  },
-  reasonFor: {
-    type: Sequelize.STRING
-  }
-});
-
-caseList.sync();
+const { cases } = require('../../settings/mysql_case-db.js')
+const { caseList } = require('../../settings/caseList.js')
+const { warnpoints } = require('../../settings/mysql_wp-db.js') 
+const { warnList } = require('../../settings/warnList.js')
 
 const Discord = require('discord.js');
 exports.run = async (client, msg) => {
