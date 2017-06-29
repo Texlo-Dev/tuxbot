@@ -25,9 +25,13 @@ Tuxbot, originally on the Linux Discord server, is now officially released!
 `userinfo`- Shows some info about the user.
 
 **Music**
+
 `play`- play a song added to the queue.
+
 `add`- add a song to the queue
+
 `queue`- get the current queue.
+
 `musichelp`- get more info on the music commands.
 
 And many more to come!
@@ -44,7 +48,7 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
 
 3. Clone the repo using by either downloading the zip or running `git clone https://github.com/RTK99/tuxbot.git`
 
-4.Run `npm i` to install all of the required modules.
+4. Run `npm i` to install all of the required modules.
 
 5. Create a config.json file in the master directory and have it look like this: 
 ```json
@@ -60,7 +64,7 @@ Make sure you select `Administrator`. Then, click the link at the bottom and add
   const { cases } = require('../../settings/mysql_case-db.js')
   const { warnpoints } = require('../../settings/mysql_wp-db.js') 
 ```
-Delete `mysql` and replace it with `sqlite`. 
+Delete `mysql_case-db` and replace it with `sqlite-case`. For `{ warnpoints }` replace that with `sqlite-wp`
 
 8. Repeat Step 7 for `warnpoints.js`, and `case.js`.
 
@@ -68,11 +72,11 @@ Delete `mysql` and replace it with `sqlite`.
 
 10. Open `caseList.js` and change it look like this:
 ```js
-  const { Sequelize, cases } = require('sqlite_case-db.js')
+  const { Sequelize, cases } = require('sqlite-case.js')
   ```
   And for `warnList.js`, it should look like this:
   ```js
-  const { Sequelize, warnpoints } = require('./mysql_wp-db.js')
+  const { Sequelize, warnpoints } = require('sqlite-wp.js')
   ```
 11. Optional: Change the prefix in`prefix:` to whatever you'd like.
 
