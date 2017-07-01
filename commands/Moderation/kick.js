@@ -20,17 +20,19 @@ exports.run = async (client, msg)  => {
 
       if (!msg.guild.member(user).kickable) return msg.reply('I cannot kick that member.');
       msg.delete(0);
-      user.send(`You have been kicked from the server for the following reason: ${reason}. You are free to rejoin, but understand that the next action is a ban.`)
-        caseList.create({userID: user.id, action:'kick', modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt}).then((res) => {  
+      let caseEntry = await caseList.count({where:{guildID:msg.guild.id}})
+      const caseInt = caseEntry + 1
+
+      await user.send(`You have been kicked from the server for the following reason: **${reason}**. You are free to rejoin, but understand that the next action is a ban.`)
+        caseList.create({guildID: msg.guild.id, caseNum: caseInt, userID: user.id, action:'Kick', modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt}).then((res) => {  
         msg.guild.member(user).kick()
-         const embed = new Discord.RichEmbed()
-       	.setColor(0xFF0000)
+        const embed = new Discord.RichEmbed() 
+        .setColor(0xFF0000)
         .setTimestamp()
-        .setThumbnail(user.displayAvatarURL('png'))
-	.addField('User Kicked', `${user.username}#${user.discriminator}`)  
-        .addField('Reason for Kick:', reason)
-	.addField('Moderator:', `${msg.author.username}#${msg.author.discriminator}`)
-        .setFooter(`Case#${res.caseNum}`)
+        .setAuthor(`${msg.author.tag}`, msg.author.displayAvatarURL({}))
+        .setThumbnail(user.displayAvatarURL({}))
+        .setDescription(`\n\n**Kick**\n\n**Member:** ${user.tag}\n\n**ID:** ${user.id}\n\n**Reason:** ${reason}`)  
+        .setFooter(`Case#${res.caseNum}`);
         msg.guild.channels.get(modlog.id).send({embed}).catch(console.error);
       });
 };

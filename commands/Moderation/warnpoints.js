@@ -14,15 +14,12 @@ let member = msg.mentions.users.first();
     }
 
     const userSnowflake = warnUser.id
-    warnList.find({where:{guildID: msg.guild.id}}).then((res) => {
+    warnList.find({where:{userID: msg.author.id, guildID: msg.guild.id}}).then((res) => {
         if (res === null) { 
             msg.delete(0);
             msg.reply('You have **0** warning points.');
         } 
-        else if (res.guildID !== msg.guild.id) {
-             msg.delete(0);
-             msg.reply('You have **0** warning points.');
-       } else { 
+        else { 
           if (res.warnpoints) {
              msg.delete(0);  
              msg.reply(`You have **${res.warnpoints}** warning points.`).catch(console.error);

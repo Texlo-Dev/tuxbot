@@ -27,22 +27,40 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
       }});
    }
   
+  let caseEntry = await caseList.count({where:{guildID:msg.guild.id}})
+  const caseInt = caseEntry + 1
+ 
   reasonStr = reason.slice(',').join(' ')
   warnUser.send(`You have been issued **${points}** warning points by **${msg.author.username}** for the following reason: ${reasonStr}`)
  console.log(require('util').inspect({userID: warnUser.id, action:`${points} warning points`, modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt})) 
- caseList.create({userID: warnUser.id, action:`${points} warning points`, modID: msg.author.id, reasonFor: reason.join(' '), createdAt: msg.createdAt}).then((res) => {
+ caseList.create({guildID: msg.guild.id, caseNum: caseInt, userID: warnUser.id, action:`${points} warning points`, modID: msg.author.id, reasonFor: reason.join(' '), createdAt: msg.createdAt}).then((res) => {
    var reasonString = reason.join(' ')
    const embed = new Discord.RichEmbed()
-    .setColor(0xFF0000)
-    .setTimestamp()
-    .setThumbnail(warnUser.displayAvatarURL({}))
-    .addField('User Warned', `${warnUser.tag}`)
-    .addField('Points:', points)
-    .addField('Reason:', reasonString)
-    .addField('Moderator:', `${msg.author.tag}`)
-    .setFooter(`Case#${res.caseNum}`)
+     .setColor(0xFF0000)
+     .setTimestamp()
+     .setAuthor(`${msg.author.tag}`, msg.author.displayAvatarURL({}))
+     .setThumbnail(warnUser.displayAvatarURL({}))
+     .setDescription(`\n**Warn**\n\n**Member:** ${warnUser.tag}\n\n**ID:** ${warnUser.id}\n\n**Warning points:** ${points}\n\n**Reason:** ${reasonStr}`)  
+     .setFooter(`Case#${res.caseNum}`)
      modlog.send({embed}).catch(console.error)
    });
+
+  var kickNum = 500;
+  var banNum = 800;
+  var total = dbEntry.warnpoints + points;
+  if (dbEntry.warnpoints === points) total = points;
+  console.log(`DB entry is ${dbEntry.warnpoints}`)
+  console.log(`Points are ${points}`)
+  console.log(`Total points are ${total}`)
+  if (total >= banNum) {
+    warnUser.send(`You have exceeded the hard limit for warning points here, and have been banned from the server. All appeals should go to **${msg.author.tag}**.`).then(() => {
+     msg.guild.ban(warnUser, {days: 3})
+   });
+  } else if (dbEntry.warnpoints < kickNum && total >= kickNum) {
+     warnUser.send(`You have exceeded the soft limit for warning points here, and have been kicked from the server. You are welcome to join again, but know that the next action is a ban.`).then(() => {
+     msg.guild.member(warnUser).kick()
+  });
+ }
 };
 
 exports.conf = {

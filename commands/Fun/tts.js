@@ -2,13 +2,15 @@ const snekfetch = require('snekfetch');
 const fs = require('fs')
 const Discord = require('discord.js')
 exports.run = async (client, msg, [message]) => {
-     await snekfetch.get("http://api.voicerss.org/?key=f793a701dcb1450aabf2cffce0ca00a5&hl=en-us&src=" + message)
-    .then(r => fs.writeFile('./message.mp3', r.body)); 
+     snekfetch.get("http://api.voicerss.org/?key=f793a701dcb1450aabf2cffce0ca00a5&hl=en-us&src=" + message)
+    .then(r => fs.writeFile('./message.mp3', r.body, function(err) {
+      if (err) return console.error(`failed, ${err}`)
+    }));
     msg.delete()
     msg.member.voiceChannel.join().then(connection =>{
       const dispatcher = connection.playFile('./message.mp3')
-	dispatcher.on("end",function () {
-          msg.member.voiceChannel.leave();
+	dispatcher.on("end",function (err) {
+          if (err) return console.error(err)
         });
     });
 };

@@ -1,6 +1,6 @@
 const dateFormat = require('dateformat');
 const now = new Date();
-dateFormat(now, 'mmmm dS, yyyy, h:MM TT');
+dateFormat(now, 'isoUtcDateTime');
 const Discord = require('discord.js');
 const config = require('../../config.json')
 const Sequelize = require('sequelize');
@@ -9,17 +9,14 @@ const { caseList } = require('../../settings/caseList.js')
 
 
 exports.run = async (client, msg, [caseNumber]) => {
-     caseList.find({where:{caseNum: caseNumber}}).then((res) => {
+     caseList.find({where:{caseNum: caseNumber, guildID: msg.guild.id}}).then((res) => {
       if (res == null) return msg.reply("That case doesn't exist.")
       const embed = new Discord.RichEmbed()
       .setColor(0xFF0000)
       .setTitle(`Case #${res.caseNum}`)
       .setAuthor(`${client.users.get(res.modID).tag}`, `${client.users.get(res.modID).displayAvatarURL({})}`)
       .setThumbnail(`${client.users.get(res.userID).displayAvatarURL({})}`)
-      .addField('User', `${client.users.get(res.userID).tag}`)
-      .addField('Action', res.action)
-      .addField('Reason', `${res.reasonFor}`)
-      .addField('Created at:', `${dateFormat(res.createdAt)}`)
+      .setDescription(`**Member:** ${client.users.get(res.userID).tag}\n\n**Action:** ${res.action}\n\n**Reason:** ${res.reasonFor}\n\n**Created At:** ${dateFormat(res.createdAt)}`)
       msg.channel.send({embed})
    });
 };

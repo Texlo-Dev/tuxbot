@@ -1,12 +1,15 @@
 const { Sequelize, cases } = require('./mysql_case-db.js')
 module.exports =  {
  	caseList: cases.define('caseList', {
-  	   caseNum: {
-        	type: Sequelize.INTEGER,
-    		autoIncrement: true,
-    		primaryKey: true
-  	  },
-  	  userID: {
+  	  guildID: {
+                 type: Sequelize.STRING
+          },
+          caseNum: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+          },
+          userID: {
     		type: Sequelize.STRING
   	  },
   	  action: {

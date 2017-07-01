@@ -13,7 +13,8 @@ module.exports = {
     	    type: Sequelize.STRING
   	    },
   	    warnpoints: {
-    	    type: Sequelize.INTEGER
+    	    type: Sequelize.INTEGER,
+            defaultValue: 0
   	 }
       })
 };
