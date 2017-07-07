@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const { cases } = require('../../settings/mysql_case-db.js')
+const { cases } = require('../../settings/mysql-case')
 const { caseList } = require('../../settings/caseList.js')
 
 const Discord = require('discord.js');
@@ -29,7 +29,7 @@ exports.run = async (client, msg)  => {
         const embed = new Discord.RichEmbed() 
         .setColor(0xFF0000)
         .setTimestamp()
-        .setAuthor(`${msg.author.tag}`, msg.author.displayAvatarURL({}))
+        .setAuthor(`${msg.author.tag} (${msg.author.id})`, msg.author.displayAvatarURL({}))
         .setThumbnail(user.displayAvatarURL({}))
         .setDescription(`\n\n**Kick**\n\n**Member:** ${user.tag}\n\n**ID:** ${user.id}\n\n**Reason:** ${reason}`)  
         .setFooter(`Case#${res.caseNum}`);

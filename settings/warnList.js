@@ -1,4 +1,4 @@
-const { Sequelize, warnpoints } = require('./mysql_wp-db.js')
+const { Sequelize, warnpoints } = require('./mysql-wp')
 module.exports = { 
         warnList: warnpoints.define('warnList', {
   	    id: {

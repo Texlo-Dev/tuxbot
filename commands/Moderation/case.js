@@ -4,7 +4,7 @@ dateFormat(now, 'isoUtcDateTime');
 const Discord = require('discord.js');
 const config = require('../../config.json')
 const Sequelize = require('sequelize');
-const { cases } = require('../../settings/mysql_case-db.js')
+const { cases } = require('../../settings/mysql-case')
 const { caseList } = require('../../settings/caseList.js')
 
 
@@ -13,10 +13,10 @@ exports.run = async (client, msg, [caseNumber]) => {
       if (res == null) return msg.reply("That case doesn't exist.")
       const embed = new Discord.RichEmbed()
       .setColor(0xFF0000)
-      .setTitle(`Case #${res.caseNum}`)
-      .setAuthor(`${client.users.get(res.modID).tag}`, `${client.users.get(res.modID).displayAvatarURL({})}`)
+      //.setTitle(`Case #${res.caseNum}`)
+      .setAuthor(`${client.users.get(res.modID).tag} (${res.modID})`, `${client.users.get(res.modID).displayAvatarURL({})}`)
       .setThumbnail(`${client.users.get(res.userID).displayAvatarURL({})}`)
-      .setDescription(`**Member:** ${client.users.get(res.userID).tag}\n\n**Action:** ${res.action}\n\n**Reason:** ${res.reasonFor}\n\n**Created At:** ${dateFormat(res.createdAt)}`)
+      .setDescription(`**Case #${res.caseNum}**\n\n**Member:** ${client.users.get(res.userID).tag} (${res.userID})\n\n**Action:** ${res.action}\n\n**Reason:** ${res.reasonFor}\n\n**Created At:** ${dateFormat(res.createdAt)}`)
       msg.channel.send({embed})
    });
 };

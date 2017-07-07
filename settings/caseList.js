@@ -1,4 +1,4 @@
-const { Sequelize, cases } = require('./mysql_case-db.js')
+const { Sequelize, cases } = require('./mysql-case')
 module.exports =  {
  	caseList: cases.define('caseList', {
   	  guildID: {

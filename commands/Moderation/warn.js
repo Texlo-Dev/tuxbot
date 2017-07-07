@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const Sequelize = require('sequelize');
 const config = require('../../config.json')
-const { cases } = require('../../settings/mysql_case-db.js')
+const { cases } = require('../../settings/mysql-case')
 const { caseList } = require('../../settings/caseList.js')
-const { warnpoints } = require('../../settings/mysql_wp-db.js') 
+const { warnpoints } = require('../../settings/mysql-wp') 
 const { warnList } = require('../../settings/warnList.js')
 
 exports.run = async (client, msg, [warnUser, points, ...reason]) => {
@@ -38,7 +38,7 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
    const embed = new Discord.RichEmbed()
      .setColor(0xFF0000)
      .setTimestamp()
-     .setAuthor(`${msg.author.tag}`, msg.author.displayAvatarURL({}))
+     .setAuthor(`${msg.author.tag} (${msg.author.id})`, msg.author.displayAvatarURL({}))
      .setThumbnail(warnUser.displayAvatarURL({}))
      .setDescription(`\n**Warn**\n\n**Member:** ${warnUser.tag}\n\n**ID:** ${warnUser.id}\n\n**Warning points:** ${points}\n\n**Reason:** ${reasonStr}`)  
      .setFooter(`Case#${res.caseNum}`)

@@ -6,7 +6,7 @@ exports.run = (client, member) => {
   member.send(`Welcome, ${member.user.username} to our Discord Server! Please take some time and read #welcome for important info. We hope you enjoy your time here!`);
   try {
     const embed = new Discord.RichEmbed()
-    .setColor(0x1F618D)
+    .setColor(3534687)
    .setTimestamp() 
    .setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURL({}))
    .setFooter('Joined')

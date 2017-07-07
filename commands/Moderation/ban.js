@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
-const { cases } = require('../../settings/mysql_case-db.js')
+const { cases } = require('../../settings/mysql-case.js')
 const { caseList } = require('../../settings/caseList.js')
-const { warnpoints } = require('../../settings/mysql_wp-db.js') 
+const { warnpoints } = require('../../settings/mysql-wp') 
 const { warnList } = require('../../settings/warnList.js')
 
 const Discord = require('discord.js');
@@ -34,11 +34,11 @@ exports.run = async (client, msg) => {
      caseList.create({caseNum: caseInt, guildID: msg.guild.id, userID: user.id, action:'Ban', modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt}).then((res) => { 
        msg.guild.ban(user, {days: 3})
        const embed = new client.methods.Embed()
-	.setColor(0xFF0000)
+	      .setColor(0xFF0000)
         .setTimestamp()
-        .setAuthor(`${msg.author.tag}`, msg.author.displayAvatarURL({}))
+        .setAuthor(`${msg.author.tag} (${msg.author.id})`, msg.author.displayAvatarURL({}))
         .setThumbnail(user.displayAvatarURL('png'))
-        .setDescription(`**Member:** ${user.tag}\n\n**ID: **${user.id}\n\n**Reason:** ${reason}`)  
+        .setDescription(`**Ban**\n\n**Member:** ${user.tag}\n\n**ID: **${user.id}\n\n**Reason:** ${reason}`)  
         .setFooter(`Case#${res.caseNum}`);
         msg.guild.channels.get(modlog.id).send({embed}).catch(console.error);
      });
