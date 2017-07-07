@@ -80,6 +80,13 @@ Delete `mysql_case-db` and replace it with `sqlite-case`. For `{ warnpoints }` r
   ```
 11. Optional: Change the prefix in`prefix:` to whatever you'd like.
 
+# Leveling
+
+To use the leveling, you must do these steps:
+- Open ./commands/Fun/xptop.js and change `mysql` to sqlite on the line `const { levels }`
+- Do the same for xpboard.js
+- Navigate back to the start folder, and go to ./settings
+- Open `levelBoard.js` and change `mysql` to `sqlite` on the first line.
 
 12. Start the bot with `npm start` or `pm2 start start.js` if you're using PM2.
 
