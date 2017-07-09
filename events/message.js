@@ -12,10 +12,11 @@ exports.run = async (client, msg) => {
        levelBoard.update({xp: gained}, {where: {guildID: msg.guild.id, userID: msg.author.id }})
     }  
     if (entry.xp >= entry.toNextLevel) {
-        var newGoal = Math.round(entry.toNextLevel * 2.23)
+        var newGoal = Math.round(entry.toNextLevel * 2.11)
         var newLevel = entry.level + 1
         var newXP = 0
         levelBoard.update({level: newLevel, toNextLevel: newGoal, xp: newXP}, {where: {guildID: msg.guild.id, userID: msg.author.id}})
+        .then(() => msg.author.send(`Level up! You are now level **${newLevel}**`))
     }
   }
  }

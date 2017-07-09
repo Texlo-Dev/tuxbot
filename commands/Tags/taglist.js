@@ -8,11 +8,11 @@ exports.run = async (client, msg) => {
     const name = args.join(' ')
 
     const tag = await tagList.findAll({ attributes: ['tagName'], where: { guildID: msg.guild.id } });
-    console.log(tag)
+   // console.log(tag)
     const tagString = tag.map(d => d.tagName).join(', ') || 'No tags were found, sorry.'
     const tagSorted = tagString.split(', ').sort().join(', ')
-    console.log(tagString)
-    console.log(tagSorted)
+    /*console.log(tagString)
+    console.log(tagSorted)*/
     return msg.channel.send(`**Available Tags:** ${tagSorted}`);
 }
 

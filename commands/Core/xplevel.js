@@ -34,25 +34,25 @@ exports.run = async (client, msg) => {
     var userString = levels.map(d => d.xp + ' ' + d.level + ' ' + d.userID).join(' ')
     var userArr = userString.split(' ')
     var userplace = userArr.indexOf(res.userID)
-    console.log(userArr)
+   // console.log(userArr)
 
      var rankArr = ['0']
      for (var i = 2; i < userArr.length; i += 3) {
         rankArr.push(userArr[i])
      }
-     console.log(rankArr)
+     //console.log(rankArr)
 
         const embed = new Discord.RichEmbed()
         .setColor(3534687)
         .setTimestamp()
         .setAuthor(`${client.users.get(res.userID).tag}`, `${client.users.get(res.userID).displayAvatarURL({})}`)
-        .addField('Leveling Stats:', `Currently level ${res.level}`)
+        .addField('Leveling Stats:', `Currently level ${res.level}`, true)
         .addField('Experience Points:', `${res.xp}/${res.toNextLevel}`, true)
         .addField('Rank:', `${rankArr.indexOf(user.id)}/${msg.guild.memberCount}`)
         .setFooter(`Requested by ${msg.author.tag}`);
         msg.delete(0)
         msg.channel.send({embed})
-        console.log(embed)
+       // console.log(embed)
     })
 }
 

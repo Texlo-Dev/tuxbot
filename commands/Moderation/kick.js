@@ -24,7 +24,15 @@ exports.run = async (client, msg)  => {
       const caseInt = caseEntry + 1
 
       await user.send(`You have been kicked from the server for the following reason: **${reason}**. You are free to rejoin, but understand that the next action is a ban.`)
-        caseList.create({guildID: msg.guild.id, caseNum: caseInt, userID: user.id, action:'Kick', modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt}).then((res) => {  
+        caseList.create({
+          guildID: msg.guild.id, 
+          caseNum: caseInt, 
+          userID: user.id, 
+          action:'Kick', 
+          modID: msg.author.id, 
+          reasonFor: reason, 
+          createdAt: msg.createdAt
+          }).then((res) => {  
         msg.guild.member(user).kick()
         const embed = new Discord.RichEmbed() 
         .setColor(0xFF0000)

@@ -3,7 +3,7 @@ module.exports = {
     tagList: tags.define('tagList', {
 	  guildID: Sequelize.STRING,
   	  tagName: Sequelize.STRING,
-  	  tagContent: Sequelize.STRING,
+  	  tagContent: Sequelize.TEXT('long'),
   	  tagAuthor: Sequelize.STRING,
 	  usage_count: {
 		  type: Sequelize.INTEGER,

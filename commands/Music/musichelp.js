@@ -27,7 +27,7 @@ exports.conf = {
 
 exports.help = {
 	name: 'musichelp',
-	description: 'Displays the OhGodMusicBot help.',
+	description: 'Displays the help options for music.',
 	usage: '',
 	usageDelim: '',
 	extendedHelp: ''

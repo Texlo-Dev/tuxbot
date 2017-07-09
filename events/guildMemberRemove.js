@@ -1,6 +1,4 @@
-const Sequelize = require('sequelize')
-const { levels } = require('../settings/mysql-leveling')
-const { levelBoard } = require('../settings/levelBoard')
+
 const Discord = require('discord.js')
 exports.run = (client, member) => {
  if (!member.guild.me.hasPermission('BAN_MEMBERS')) return;
@@ -17,8 +15,6 @@ exports.run = (client, member) => {
  } catch (e) {
   console.error(e)
  }
- levelBoard.destroy({where: {userID: member.user.id, guildID: member.guild.id }})
-
 };
 
 

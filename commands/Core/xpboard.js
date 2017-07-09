@@ -17,9 +17,7 @@ exports.run = async (client, msg) => {
   
     var userString = levels.map(d => d.xp + ' ' + d.level + ' ' + d.userID).join(' ')
     var userArr = userString.split(' ')
-    console.log(userString)
-    console.log(userArr)
-    console.log(levels)
+   console.log(userArr[20])
     const embed = new Discord.RichEmbed()
      .setColor(0xFF4141)
      .setTimestamp()
@@ -35,6 +33,7 @@ exports.run = async (client, msg) => {
     .addField(`#9 - Level ${userArr[25]} (${userArr[24]}XP)`, `${client.users.get(userArr[26])}`)
     .addField(`#10 - Level ${userArr[28]} (${userArr[27]}XP)`, `${client.users.get(userArr[29])}`)
     .setFooter(`Requested by ${msg.author.tag}`)
+    msg.delete()
     msg.channel.send({embed})
 };
 

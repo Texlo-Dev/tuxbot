@@ -3,8 +3,10 @@ const { cases } = require('../../settings/mysql-case.js')
 const { caseList } = require('../../settings/caseList.js')
 const { warnpoints } = require('../../settings/mysql-wp') 
 const { warnList } = require('../../settings/warnList.js')
-
+const { levels } = require('../../settings/mysql-leveling')
+const { levelBoard } = require('../../settings/levelBoard')
 const Discord = require('discord.js');
+
 exports.run = async (client, msg) => {
 
      const user = msg.mentions.users.first();
@@ -31,7 +33,16 @@ exports.run = async (client, msg) => {
       const caseInt = caseEntry + 1
 
      await user.send(`You have been banned from this server for the following reason: **${reason}**. If you feel like this was unjust, feel free to appeal this ban to **${msg.author.tag}**.`)
-     caseList.create({caseNum: caseInt, guildID: msg.guild.id, userID: user.id, action:'Ban', modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt}).then((res) => { 
+     await levelBoard.destroy({where: {guildID: msg.guild.id, userID: user.id}})
+     caseList.create({
+       caseNum: caseInt, 
+       guildID: msg.guild.id, 
+       userID: user.id, 
+       action:'Ban', 
+       modID: msg.author.id, 
+       reasonFor: reason, 
+       createdAt: msg.createdAt
+       }).then((res) => { 
        msg.guild.ban(user, {days: 3})
        const embed = new client.methods.Embed()
 	      .setColor(0xFF0000)
@@ -44,7 +55,6 @@ exports.run = async (client, msg) => {
      });
      
 };
-
 
 exports.conf = {
   enabled: true,

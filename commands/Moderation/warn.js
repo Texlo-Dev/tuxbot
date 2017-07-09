@@ -33,7 +33,15 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
   reasonStr = reason.slice(',').join(' ')
   warnUser.send(`You have been issued **${points}** warning points by **${msg.author.username}** for the following reason: ${reasonStr}`)
  console.log(require('util').inspect({userID: warnUser.id, action:`${points} warning points`, modID: msg.author.id, reasonFor: reason, createdAt: msg.createdAt})) 
- caseList.create({guildID: msg.guild.id, caseNum: caseInt, userID: warnUser.id, action:`${points} warning points`, modID: msg.author.id, reasonFor: reason.join(' '), createdAt: msg.createdAt}).then((res) => {
+ caseList.create({
+   guildID: msg.guild.id,
+   caseNum: caseInt, 
+   userID: warnUser.id, 
+   action:`${points} warning points`, 
+   modID: msg.author.id, 
+   reasonFor: reason.join(' '), 
+   createdAt: msg.createdAt
+   }).then((res) => {
    var reasonString = reason.join(' ')
    const embed = new Discord.RichEmbed()
      .setColor(0xFF0000)
