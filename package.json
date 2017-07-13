@@ -46,6 +46,7 @@
     "jslint": "^0.10.3",
     "komada": "github:dirigeants/komada#indev",
     "mongodb": "^2.2.29",
+    "mongorito": "^3.0.3",
     "mysql2": "^1.3.5",
     "node-opus": "^0.2.6",
     "opusscript": "0.0.3",

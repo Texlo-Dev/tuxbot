@@ -17,7 +17,8 @@ exports.run = async (client, msg) => {
   
     var userString = levels.map(d => d.xp + ' ' + d.level + ' ' + d.userID).join(' ')
     var userArr = userString.split(' ')
-   console.log(userArr[20])
+  // console.log(userArr[20])
+   console.log(levels)
     const embed = new Discord.RichEmbed()
      .setColor(0xFF4141)
      .setTimestamp()

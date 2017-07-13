@@ -1,30 +1,34 @@
-const Sequelize = require('sequelize');
-const distros = new Sequelize({
-  dialect: 'sqlite',
+const {Database, Model} = require('mongorito')
+const connection = new Database('localhost/tuxbot')
+connection.connect()
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.log(`Hmm...thee was an error connecting to MongoDB... ${err.stack}`))
 
-  storage: './sqlite/database.sqlite',
+class Distro extends Model {
+      collection() {
+          return ('distroLists')
+      }
 
-  logging: false
-});
+}
+connection.register(Distro)
 
-const distroList = distros.define('distroList', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    distro: {
-        type: Sequelize.STRING
-    }
-});
+exports.run = async (client, msg) => {
+  const args = msg.content.split(' ').slice(1)
+  if (!msg.member.hasPermission('BAN_MEMBERS')) return msg.reply('You don\'t have permissions to perform this operation.')
+    const flair = args.join(' ')
+    if (!flair) return msg.reply('Please specify a distro to add.')
+    
+    let toAdd = await Distro.findOne({
+        distro: flair
+    })
+    if (toAdd) return msg.reply('That distro already exists.')
+    let added = new Distro({
+        distro: flair
+    })
+    added.save().then(() => msg.reply(`Successfully added **${flair}** to the database.`))
 
-distroList.sync();
+}
 
-exports.run = async (client, msg, [distroName]) => {
-    msg.reply(`Distro **${distroName}** successfully added to the database.`).then(() => {
-      distroList.create({distro:distroName})
-   });
-};
 
 exports.conf = {
   enabled: true,
@@ -39,7 +43,7 @@ exports.conf = {
 exports.help = {
   name: "adddistro",
   description: "adds a distro to the database.",
-  usage: "<distroName:str>",
+  usage: "",
   usageDelim: " ",
   extendedHelp: "",
 };

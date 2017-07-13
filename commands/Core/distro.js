@@ -1,63 +1,33 @@
-const Sequelize = require('sequelize');
-const distros = new Sequelize({
-  dialect: 'sqlite',
+const {Database, Model} = require('mongorito')
+const connection = new Database('localhost/tuxbot')
+connection.connect()
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error(`Hmm..there was an error connecting with MongoDB.. ${err.stack}`))
+class Distro extends Model {
+      collection() {
+          return ('distroLists')
+      }
 
-  storage: './sqlite/database.sqlite',
+}
+connection.register(Distro)
 
-  logging: false
-});
-
-const distroList = distros.define('distroList', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    distro: {
-        type: Sequelize.STRING
-    }
-});
-
-distroList.sync();
-
-exports.run = async (client, msg, prefix) => {
-
-        var nickname = msg.content.replace('./distro', '').trim();
+exports.run = async (client, msg) => {
+    const args = msg.content.split(' ').slice(1)
+    const flair = args.join(' ')
+    if (!flair) return msg.reply('Please specify a distro name, silly!.')
+    var nickname = msg.content.replace(`./distro`, '').trim();
           newNick = msg.author.username + ' [' + nickname + ']';
 
-          // Check if distro exists
-      let args3 = msg.content.split(' ');
-      USERINPUT = args3.slice(1).join(' ');
-      distroList.find({where:{distro:USERINPUT}}).then((res) => {
-    if(res === null) {
-            //false
-    } else {
-        //true
-    }});
-
-
     
+    let toAdd = await Distro.findOne({
+        distro: flair
+    })
+    if (!toAdd) return msg.reply(`Sorry, the distro **${flair}** didn\'t exist. If you know its correct, contact a server admin to get it added.`)
+     msg.member.setNickname(newNick).catch(console.error)
+     msg.reply(`You have been successfully updated to **${flair}** :thumbsup:`)
 
-      // Remove distro
-          if (nickname.length === 0) {
-              msg.member.setNickname(msg.author.username).catch(console.error);
-              msg.reply('Distro removed').catch(console.error);
-          }
-          // Check for length limit
-          else if (newNick.length > 32) {
-              msg.reply('Distro too long').catch(console.error);
-          }
-          // Set distro
-         else {
-distroList.find({where:{distro:USERINPUT}}).then((res) => {
-    if(res === null) {
-            msg.reply(`Sorry, the distro **${USERINPUT}** is invalid. If you know it's correct, contact a server admin to get it added.`);
+}
 
-     } else {
-          msg.member.setNickname(newNick).catch(console.error);
-              msg.reply(`Nickname updated, you have been added to **${USERINPUT}** :thumbsup:`).catch(console.error);
-     }});
-}};
 
 exports.conf = {
   enabled: true,

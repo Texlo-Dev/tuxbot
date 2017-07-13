@@ -12,12 +12,16 @@ exports.run = async (client, msg) => {
        levelBoard.update({xp: gained}, {where: {guildID: msg.guild.id, userID: msg.author.id }})
     }  
     if (entry.xp >= entry.toNextLevel) {
-        var newGoal = Math.round(entry.toNextLevel * 1.92)
+        var newGoal = Math.round(entry.toNextLevel * 1.291)
         var newLevel = entry.level + 1
         var newXP = 0
         levelBoard.update({level: newLevel, toNextLevel: newGoal, xp: newXP}, {where: {guildID: msg.guild.id, userID: msg.author.id}})
         .then(() => msg.author.send(`Level up! You are now level **${newLevel}**`))
     }
+  }
+
+  if (msg.content.match(/discord(.gg|app.com\/invite\/[a-z0-9]{7})/gi)) {
+      msg.delete().then(m => m.author.send('Please do not post Discord invites here.'))
   }
  }
 

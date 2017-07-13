@@ -1,30 +1,33 @@
-const Sequelize = require('sequelize');
-const distros = new Sequelize({
-  dialect: 'sqlite',
+const {Database, Model} = require('mongorito')
+const connection = new Database('localhost/tuxbot')
+connection.connect()
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.log(`Hmm...thee was an error connecting to MongoDB... ${err.stack}`))
 
-  storage: './sqlite/database.sqlite',
+class Distro extends Model {
+      collection() {
+          return ('distroLists')
+      }
 
-  logging: false
-});
+}
+connection.register(Distro)
 
-const distroList = distros.define('distroList', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    distro: {
-        type: Sequelize.STRING
-    }
-});
+exports.run = async (client, msg) => {
+       const args = msg.content.split(' ')
+       const dist = args.slice(1).join(1)
+       if (!dist) return msg.reply('Please specify a distro to delete.')
 
-distroList.sync();
+       const query = await Distro.findOne({
+         distro: dist
+       })
 
-exports.run = async (client, msg, [distroName]) => {
-       const dist = await distroList.destroy({where:{distro: distroName}});
-       if (!dist) return msg.reply("Er...that distro didn't exist. Please specify a valid distro to delete.");
-   
-       return msg.reply(`Successfully deleted **${distroName}** from the database.`);
+       if (!query) return msg.reply('Oops! That distro wasn\'t in my records.')
+       try {
+         query.remove()
+         return msg.reply(`Successfully deleted the distro **${dist}**.`)
+       } catch (error) {
+         return msg.reply(`Oops, there was an error! \`\`\`${err}\`\`\``)
+       }
 };
 
 exports.conf = {
@@ -40,7 +43,7 @@ exports.conf = {
 exports.help = {
   name: "rmdistro",
   description: "Deletes a distro from the database.",
-  usage: "<distroName:str>",
+  usage: "",
   usageDelim: "",
   extendedHelp: "",
 };
