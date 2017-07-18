@@ -12,7 +12,7 @@ exports.run = async (client, msg, [caseNumber]) => {
      caseList.find({where:{caseNum: caseNumber, guildID: msg.guild.id}}).then((res) => {
       if (res == null) return msg.reply("That case doesn't exist.")
      client.fetchUser(res.userID).then(user => {
-      const embed = new Discord.RichEmbed()
+      const embed = new Discord.MessageEmbed()
       .setColor(0xFF0000)
       //.setTitle(`Case #${res.caseNum}`)
       .setAuthor(`${client.users.get(res.modID).tag} (${res.modID})`, `${client.users.get(res.modID).displayAvatarURL({})}`)

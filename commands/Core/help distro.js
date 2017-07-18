@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 exports.run = async (client, msg, prefix) => {
 
- const embed = new Discord.RichEmbed()
+ const embed = new Discord.MessageEmbed()
         .setColor(0x8EE85F)
         .setTimestamp()
         .addField('distro', 'Adds your distro to your username.')  

@@ -17,7 +17,7 @@ exports.run = async (client, msg, [ID]) => {
       modID: msg.author.id,
       reasonFor: reason
     }).then((res) => {
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
         .setColor(0xFF4141)
         .setTimestamp()
         .setAuthor(`${msg.author.tag} (${msg.author.id})`, msg.author.displayAvatarURL({}))

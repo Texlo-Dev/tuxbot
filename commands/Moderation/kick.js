@@ -34,7 +34,7 @@ exports.run = async (client, msg)  => {
           createdAt: msg.createdAt
           }).then((res) => {  
         msg.guild.member(user).kick()
-        const embed = new Discord.RichEmbed() 
+        const embed = new Discord.MessageEmbed() 
         .setColor(0xFF0000)
         .setTimestamp()
         .setAuthor(`${msg.author.tag} (${msg.author.id})`, msg.author.displayAvatarURL({}))

@@ -42,7 +42,7 @@ exports.run = async (client, msg) => {
      }
      //console.log(rankArr)
 
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
         .setColor(3534687)
         .setTimestamp()
         .setAuthor(`${client.users.get(res.userID).tag}`, `${client.users.get(res.userID).displayAvatarURL({})}`)

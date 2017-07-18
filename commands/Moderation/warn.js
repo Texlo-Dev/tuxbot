@@ -29,6 +29,7 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
   
   let caseEntry = await caseList.count({where:{guildID:msg.guild.id}})
   const caseInt = caseEntry + 1
+ console.log(caseInt)
  
   reasonStr = reason.slice(',').join(' ')
   warnUser.send(`You have been issued **${points}** warning points by **${msg.author.username}** for the following reason: ${reasonStr}`)
@@ -43,7 +44,7 @@ exports.run = async (client, msg, [warnUser, points, ...reason]) => {
    createdAt: msg.createdAt
    }).then((res) => {
    var reasonString = reason.join(' ')
-   const embed = new Discord.RichEmbed()
+   const embed = new Discord.MessageEmbed()
      .setColor(0xFF0000)
      .setTimestamp()
      .setAuthor(`${msg.author.tag} (${msg.author.id})`, msg.author.displayAvatarURL({}))

@@ -18,7 +18,7 @@ const daysCreated = millisCreated/1000/60/60/24;
 const millisJoined = new Date().getTime() - member.joinedAt.getTime();
 const daysJoined = millisJoined/1000/60/60/24;
 
- const embed5 = new Discord.RichEmbed() 
+ const embed5 = new Discord.MessageEmbed() 
      .setColor(0x8EE85F)
      .setTimestamp() 
      .setThumbnail(`${user.displayAvatarURL('png')}`)

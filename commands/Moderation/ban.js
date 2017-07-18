@@ -31,6 +31,7 @@ exports.run = async (client, msg) => {
       msg.delete(0);
       let caseEntry = await caseList.count({where:{guildID:msg.guild.id}})
       const caseInt = caseEntry + 1
+     console.log(caseInt)
 
      await user.send(`You have been banned from this server for the following reason: **${reason}**. If you feel like this was unjust, feel free to appeal this ban to **${msg.author.tag}**.`)
      await levelBoard.destroy({where: {guildID: msg.guild.id, userID: user.id}})

@@ -8,7 +8,7 @@ exports.run = async (client, msg) => {
   const days = millis/1000/60/60/24;
   const verificationLevels = ['None', 'Low', 'Medium', 'Insane'];
   let server = msg.guild;
-  const embed = new Discord.RichEmbed()
+  const embed = new Discord.MessageEmbed()
   .addField(`${server.name}`, "*Server info*")
   .setTimestamp()
   .setThumbnail(`${server.iconURL('png')}`)

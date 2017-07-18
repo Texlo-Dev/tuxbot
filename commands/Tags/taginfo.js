@@ -9,7 +9,7 @@ exports.run = async (client, msg) => {
     if (!name) return msg.reply('Please specify a tag name.')
      const tag = await tagList.findOne({where: {tagName: name, guildID: msg.guild.id}})
     if (tag) {
-       const embed = new Discord.RichEmbed()
+       const embed = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .setAuthor(`Author: ${client.users.get(tag.tagAuthor).tag}`, `${client.users.get(tag.tagAuthor).displayAvatarURL({})}`)
         .addField('Tag name:', `${tag.tagName}`)
