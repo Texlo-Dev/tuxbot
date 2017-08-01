@@ -5,7 +5,7 @@ exports.run = (client, member) => {
   if (!channel) return;
   member.send(`Welcome, ${member.user.username} to our Discord Server! Please take some time and read #welcome for important info. We hope you enjoy your time here!`);
   try {
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
     .setColor(3534687)
    .setTimestamp() 
    .setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURL({}))
