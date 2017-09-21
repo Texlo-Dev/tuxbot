@@ -1,0 +1,16 @@
+{
+  "name": "tuxbot",
+  "version": "1.0.0",
+  "description": "Bot for Linux Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rtexel",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "github:hydrabolt/discord.js#master",
+    "discord.js-commando": "github:gawdl3y/discord.js-commando#master",
+    "mongorito": "^3.0.4"
+  }
+}
