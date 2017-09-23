@@ -23,7 +23,7 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if (message.author.id !=== client.user.id && message.channel.id === "361120040524972032" && !message.content.startsWith(client.commandPrefix + 'distro')) return message.delete();
+    if (message.author.id !== client.user.id && message.channel.id === "361120040524972032" && !message.content.startsWith(client.commandPrefix + 'distro')) return message.delete();
 });
 
 
