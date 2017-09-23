@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const {Database, Model} = require('mongorito');
 const connection = new Database('localhost/tuxbot');
-let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Others', 'Manjaro', 'Antergos'];
+let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Others', 'Manjaro', 'AntergosR'];
 connection.connect()
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error(`Hmm..there was an error connecting with MongoDB.. ${err.stack}`));
@@ -36,10 +36,12 @@ module.exports = class DistroCommand extends Command {
     }
 
     async run (message, { distro }) {
+        if (message.channel.id !== '361120040524972032') return message.channel.send('All roles should be requested in #role-request.');
+        message.delete();
         message.member.addRole(distro).catch(e => {
-            return message.reply('Sorry, this role could not be assigned.');
+            return message.reply('Sorry, this role could not be assigned.').then(m => m.delete({timeout: 3000}));
         });
-        message.reply(`You have been successfully updated to **${distro.name}** :thumbsup:`);
+        message.reply(`You have been successfully updated to **${distro.name}** :thumbsup:`).then(m => m.delete({timeout: 3000}));
 
 
         /*
