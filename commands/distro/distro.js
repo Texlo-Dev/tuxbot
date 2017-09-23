@@ -25,7 +25,7 @@ module.exports = class DistroCommand extends Command {
                 key: 'distro',
                 prompt: 'What distro would you like to add?',
                 type: 'role',
-                wait: 0,
+                wait: 1,
                 validate: t => {
                     if (roles.includes(t)) return true;
                     return 'Sorry, this isn\'t a valid distro role.';
