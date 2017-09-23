@@ -22,5 +22,9 @@ client.on('ready', () => {
     console.log(`- Logged in as ${client.user.tag}!`);
 });
 
+client.on('message', message => {
+    if (message.channel.id === "361120040524972032" && !message.content.startsWith(client.commandPrefix)) return message.delete();
+});
+
 
 client.login(config.token);
