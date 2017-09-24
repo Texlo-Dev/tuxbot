@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const {Database, Model} = require('mongorito');
 const connection = new Database('localhost/tuxbot');
-let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Other', 'Manjaro', 'Antergos', 'Mint'];
+let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Other', 'Manjaro', 'Antergos', 'Mint', 'elementaryOS'];
 connection.connect()
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error(`Hmm..there was an error connecting with MongoDB.. ${err.stack}`));
