@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const {Database, Model} = require('mongorito');
 const connection = new Database('localhost/tuxbot');
-let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Other', 'Manjaro', 'Antergos', 'Mint', 'elementaryOS'];
+let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Others', 'Manjaro', 'Antergos', 'Mint', 'elementaryOS'];
 connection.connect()
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error(`Hmm..there was an error connecting with MongoDB.. ${err.stack}`));
@@ -25,18 +25,15 @@ module.exports = class DistroCommand extends Command {
                 key: 'distro',
                 prompt: 'What distro would you like to add?',
                 type: 'role',
-                wait: 1,
-                validate: t => {
-                    if (roles.includes(t)) return true;
-                    return 'Sorry, this isn\'t a valid distro role.';
-                    
-                }
+                default: ''
 
             }]
         });
     }
 
     async run (message, { distro }) {
+        if (!distro) return message.reply('Sorry, no distro was specicied.');
+        if (!roles.includes(distro.name)) return message.reply('Sorry, that wasn\'t a valid distro role.').then(m => m.delete({timeout: 3000}));
         if (message.channel.id !== '361120040524972032') return message.channel.send('All roles should be requested in #role-request.');
         message.delete();
         message.member.addRole(distro).catch(e => {
@@ -45,21 +42,5 @@ module.exports = class DistroCommand extends Command {
         message.reply(`You have been successfully updated to **${distro.name}** :thumbsup:`).then(m => m.delete({timeout: 3000}));
 
 
-        /*
-        if (!distro) {
-            message.member.setNickname(message.author.username);
-            return message.reply('Your role has been reset!');
-        }
-        let newNick;
-        var nickname = message.content.replace(`./distro`, '').trim();
-        newNick = message.author.username + ' [' + nickname + ']';
-
-    
-        let toAdd = await Distro.findOne({
-            distro
-        });
-        if (!toAdd) return message.reply(`Sorry, the distro **${distro}** didn't exist. If you know its correct, contact a server admin to get it added.`);
-        message.member.setNickname(newNick).catch(e => message.reply('Sorry, I cannot change your nickname.'));
-        message.reply(`You have been successfully updated to **${distro}** :thumbsup:`); */
     }
 };
