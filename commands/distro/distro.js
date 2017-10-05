@@ -33,14 +33,13 @@ module.exports = class DistroCommand extends Command {
 
     async run (message, { distro }) {
         if (!distro) return message.reply('Sorry, no distro was specicied.');
-        if (!roles.includes(distro.name)) return message.reply('Sorry, that wasn\'t a valid distro role.').then(m => m.delete({timeout: 3000}));
+        if (!roles.includes(distro.name)) return message.reply('Sorry, that wasn\'t a valid distro role.');
         if (message.channel.id !== '361120040524972032') return message.channel.send('All roles should be requested in #role-request.');
         message.delete();
         message.member.addRole(distro).catch(e => {
-            return message.reply('Sorry, this role could not be assigned.').then(m => m.delete({timeout: 3000}));
+            return message.reply('Sorry, this role could not be assigned.');
         });
-        message.reply(`You have been successfully updated to **${distro.name}** :thumbsup:`).then(m => m.delete({timeout: 3000}));
-
+        message.reply(`You have been successfully updated to **${distro.name}** :thumbsup:`);
 
     }
 };
