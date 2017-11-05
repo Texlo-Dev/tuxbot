@@ -4,11 +4,11 @@ let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora',
 module.exports = class DistroCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'distro',
+            name: 'leavedistro',
             group: 'distro',
-            memberName: 'distro',
-            description: 'Adds a distro to your username.',
-            example: ['distro ubuntu'],
+            memberName: 'leavedistro',
+            description: 'Removes a distro role from your username.',
+            example: ['leavedistro ubuntu'],
             args: [{
                 key: 'distro',
                 prompt: 'What distro would you like to leave?',
