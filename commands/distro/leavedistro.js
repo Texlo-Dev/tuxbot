@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Others', 'Manjaro', 'Antergos', 'Mint', 'elementaryOS', 'Kernel'];
+let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Others', 'Manjaro', 'Antergos', 'Mint', 'elementaryOS', 'Kernel', 'Void'];
 
 module.exports = class DistroCommand extends Command {
     constructor(client) {
@@ -13,7 +13,8 @@ module.exports = class DistroCommand extends Command {
                 key: 'distro',
                 prompt: 'What distro would you like to leave?',
                 type: 'role',
-                default: ''
+                default: '',
+                wait: 1
 
             }]
         });
