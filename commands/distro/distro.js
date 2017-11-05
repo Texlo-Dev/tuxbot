@@ -13,7 +13,7 @@ module.exports = class DistroCommand extends Command {
                 key: 'distro',
                 prompt: 'What distro would you like to add?',
                 type: 'role',
-                default: '',
+                default: 'n',
                 wait: 1
 
             }]
