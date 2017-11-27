@@ -5,7 +5,7 @@ module.exports = class DistroCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'addrole',
-            group: 'Role Request',
+            group: 'role request',
             memberName: 'addrole',
             description: 'Adds a role to your collection.',
             example: ['distro ubuntu'],

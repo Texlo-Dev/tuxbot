@@ -11,7 +11,7 @@ const client = new CommandoClient({
 client.registry
     .registerDefaultTypes()
     .registerGroups([
-        ['distro', 'Distro']
+        ['role request', 'Role Request']
     ])
     .registerDefaultGroups()
     .registerDefaultCommands()
