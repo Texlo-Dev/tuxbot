@@ -23,7 +23,10 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if (message.author.id !== client.user.id && message.channel.id === "361120040524972032" && !message.content.startsWith(client.commandPrefix + 'distro')) return message.delete();
+    if (message.author.id !== client.user.id && message.channel.id === "405552114170069003" && !message.content.startsWith(client.commandPrefix + 'agree')) return message.delete();
+    if (message.channel.id === '361120040524972032') message.delete({timeout: 3000});
+
+    if (message.author.id !== client.user.id && message.channel.id === "361120040524972032" && !message.content.startsWith(client.commandPrefix + 'agree')) return message.delete();
     if (message.channel.id === '361120040524972032') message.delete({timeout: 3000});
 });
 
