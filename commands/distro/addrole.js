@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Others', 'Manjaro', 'Antergos', 'Mint', 'elementaryOS', 'News', 'Void', 'Showcase Contestant', 'Gentoo', 'Slackware'];
+let roles = ['Ubuntu', 'Kali', 'Debian', 'Arch', 'OpenSUSE', 'RedHat', 'Fedora', 'Others', 'Manjaro', 'Antergos', 'Mint', 'elementaryOS', 'News', 'Void', 'Showcase Contestant', 'Gentoo', 'Slackware', 'Events'];
 
 module.exports = class DistroCommand extends Command {
     constructor(client) {
