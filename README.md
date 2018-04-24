@@ -1,3 +1,5 @@
+Hi Cryniixz!
+
 [![Build Status](https://travis-ci.org/RTK99/tuxbot.svg?branch=master)](https://travis-ci.org/RTK99/tuxbot)
 
 # tuxbot
