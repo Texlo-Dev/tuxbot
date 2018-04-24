@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/RTK99/tuxbot.svg?branch=master)](https://travis-ci.org/RTK99/tuxbot)
-[![Discord](https://discordapp.com/api/guilds/304606245132697600/embed.png)](http://discord.gg/Xcn9yVK)
 
 # tuxbot
 A Komada-based bot coded in node.js
